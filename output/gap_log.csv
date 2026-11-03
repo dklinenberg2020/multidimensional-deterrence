@@ -1,2 +1,9 @@
 ts,script,what,n,note
-2026-11-03 03:13:03,06_pilot,pilot strikes with severity/dmg/action_id NA (not yet defined),142,by design in Phase 1
+2026-11-03 03:17:01,01_ingest_viina,events without coordinates,0,kept; lat/lon NA
+2026-11-03 03:17:11,02_size_job,months with a_rus_init_b unpopulated (>50% NA),37,reported NA in monthly_counts.csv
+2026-11-03 03:18:03,04_build_registry,Wikidata MW set NA as implausible,1,Q56356704
+2026-11-03 03:18:03,04_build_registry,Wikidata UA plants with multiple MW values (max kept),0,
+2026-11-03 03:18:03,04_build_registry,facilities without coordinates,15,RU_OTH_ASTRAKHAN_GPP;RU_OTH_USTLUGA;RU_REF_NEVSKY;RU_REF_PERVYI;RU_REF_SLAVYANSK;UA_CHP_CHERKASKA;UA_CHP_DARNYTSKA;UA_CHP_DNIPRODZERZHYNSKA;UA_CHP_KHARKIVSKA_3;UA_CHP_KHERSONSKA;UA_CHP_KRAMATORSKA;UA_CHP_KYYIVSKA_5;UA_CHP_KYYIVSKA_6;UA_TPP_DOBROTVIRSKA;UA_TPP_LADYZHYNSKA
+2026-11-03 03:18:03,04_build_registry,facilities without capacity,16,
+2026-11-03 03:18:23,05_russia_coverage,IntelliNews strike-dates at facilities with no coordinates (dropped),23,Slavyansk ECO;Pervyi Zavod (Kaluga mini-refinery);Nevsky Mazut (St Petersburg);Ust-Luga (Novatek) CONDENSATE PLANT;Astrakhan GAS PROCESSING PLANT
+2026-11-03 03:18:48,06_pilot,pilot strikes with severity/dmg/action_id NA (not yet defined),142,by design in Phase 1

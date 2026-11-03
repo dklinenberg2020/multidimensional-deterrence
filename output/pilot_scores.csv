@@ -1,0 +1,9 @@
+metric,value,n,note
+recall_attack_level,1,2,reference: manual_reference
+recall_facility_all,0.5714285714285714,7,"named registry facilities in massive attacks, d..d+1"
+recall_facility_confirmed,0.4,5,excluding facilities only named as targets
+recall_oblast,0.5454545454545454,11,"attack-date x oblast with confirmed damage, d..d+1"
+precision_strict,0.82,50,"AMBIG counted as false; labels by LLM, not human-verified"
+precision_lenient,0.88,50,AMBIG counted as true
+attacker_accuracy_among_true,0.9024390243902439,41,
+facility_match_correct,0.2222222222222222,9,share of sampled facility matches judged right/partly right

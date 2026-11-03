@@ -35,6 +35,8 @@ Rscript R/run_all.R            # runs 01..07 from the repo root
 
 ## Decisions taken (Phase 1)
 
+0. **Language** (PI, 2026-11-03). Any language is fine; use whatever is best for the task. The existing pipeline stays in R. Python is preferred for headline number extraction (casualties) and any classifier.
+
 Each decision is provisional unless it is marked as fixed by the brief.
 
 1. **VIINA version.** VIINA is pinned to commit `a1ad3633…` (main, 2026-10-27). I use the raw `event_info` + `event_labels` files, not the `event_1pd` one-per-day files: our own de-duplication rule has to run on raw reports.
@@ -56,7 +58,16 @@ Each decision is provisional unless it is marked as fixed by the brief.
     - Target = `facility_id` if matched, else class × oblast × VIINA populated place (`geonameid`).
     - Windows are anchored at the first report of each strike, so follow-up reports cannot chain a strike past 24 h.
     - The timestamp is VIINA `date` + `time`, read as Kyiv time.
-11. **Recall reference.** The energy-map.info file needs an account (see Blocked sources). In its place I compiled a provisional reference list of March 2024 attacks on energy by hand from public reporting; every row has a source URL (`data/raw/manual_reference/2026-11-03/`). Recall against energy-map itself is still to do.
+11. **Recall reference.** The energy-map.info file needs an account (see Blocked sources). In its place I compiled a provisional reference list of March 2024 attacks on energy by hand, with a source URL on every row (`data/raw/manual_reference/2026-11-03/`). It draws on Ukrenergo, DTEK and Ukrhydroenergo Telegram posts, Ministry of Energy bulletins and DiXi weekly reviews #40–44. `massive_flag = yes` marks only the attacks Ukrenergo or the Ministry called "massive": 22 and 29 March. Plants that were named as targets but whose damage was not confirmed (Kaniv, Dniester HPPs) are marked `uncertain`. Recall against energy-map itself is still to do.
+    - Recall results (March 2024):
+      - attack level: 2/2;
+      - named registry plants: 4/7, or 2/5 counting confirmed damage only;
+      - attack-date × oblast: 6/11.
+    - Misses come from three sources:
+      - "критична інфраструктура" (critical infrastructure) headlines are not in the dictionary;
+      - plants named only days later: Zmiiv on 30 Mar, Burshtyn in a repair report on 27 Mar;
+      - Ladyzhyn TPP has no coordinates.
+    - **Next fix:** add the critical-infrastructure term and widen the recall window to day 0–3 for named plants. I have held this back so that the labelled precision sample stays valid.
 12. **Precision labels.** I (Claude) labelled the 50-strike sample from the headline text only. These labels are not human-verified, and the file says so (`data/raw/manual_labels/2026-11-03/pilot_precision_labels.csv`).
 
 ---
@@ -84,6 +95,13 @@ Each decision is provisional unless it is marked as fixed by the brief.
 | OpenStreetMap Overpass API | The connection is reset by the egress proxy (both mirrors). | I used Wikipedia/Wikidata instead. Overpass would give better facility polygons, if network policy allows it. |
 
 ---
+
+## Proposal sent to the PI (2026-11-03): action mapping and damage. Not implemented.
+
+- **Hierarchy:** report → strike (built: same target and attacker within 24 h) → action → episode (lull of 48 h or more).
+- **Action:** a run of strikes by one side. It ends when the other side strikes, or after a gap of **g = 12 h** by the same side. The 12 h covers news-publication lag on overnight waves. Overlapping RU/UA actions are allowed and ordered by start time; `gap_prev` may then be negative. Alternative: group strikes by RU "attack night", using the Ukrainian Air Force daily tallies as the backbone.
+- **`dmg_kin`:** death counts extracted from headlines, taking the maximum across a strike's reports. Where no count is reported, a modelled expected value is filled in (weapon × target × location) and flagged as modelled. The action value is the sum over its strikes. Cross-checks: OHCHR monthly totals, and ACLED if access is approved.
+- **`dmg_econ`:** capacity as a share of national capacity × a severity weight. IntelliNews's 0–4 damage scale maps to 0 / 0.1 / 0.3 / 0.6 / 1; RU→UA severity would be coded from the reports. Robustness check: capacity × days offline. Unnamed grid strikes stay NA, or are measured by customers cut off, or by an oblast proxy (PI to decide).
 
 ## Open questions / decisions for the PI
 
