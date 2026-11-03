@@ -96,7 +96,29 @@ Each decision is provisional unless it is marked as fixed by the brief.
 
 ---
 
-## Proposal sent to the PI (2026-11-03): action mapping and damage. Not implemented.
+## Economic damage: PI decision (2026-11-03), implemented for the pilot in `R/08_pilot_econ_damage.R`
+
+- **Named facility with capacity:** `dmg_econ = capacity / national capacity × severity weight`.
+  - National denominators are in `registry/national_capacity.csv`:
+    - UA: 56.1 GW installed at end-2021 (BDO 2023 report, checked in the PDF);
+    - RU: 327 mn t/yr refining (IntelliNews).
+  - Severity is coded from the strike's headlines on IntelliNews's 0–4 scale, taking the maximum over the strike's reports. Weights: 0 / 0.1 / 0.3 / 0.6 / 1.
+  - Severity 0 means attacked but no damage reported, so `dmg_econ` = 0 (a real zero, not NA).
+- **Grid strikes:** `cust_out` = the maximum number of customers or people left without power in the strike's headlines. A headline counts only if it also names an attack and does not describe restoration.
+  - Kept as a separate column, because it is not in the same units as `dmg_econ`.
+- **Everything else:** `dmg_econ` stays NA, and `econ_flag` gives the reason.
+- **No oblast-level proxy.** The PI rejected it.
+- **March 2024 pilot result (142 strikes):**
+  - 13 have `dmg_econ`;
+  - 6 have `cust_out` (Kharkiv 600k on 22 Mar is the largest);
+  - **123 have neither.**
+- **Main coverage fix:** Ukrenergo and Ministry of Energy daily bulletins report customers cut off almost every day; e.g. Odesa 195k on 25 Mar and 170k on 31 Mar, both absent from VIINA headlines. Next step: ingest those bulletins.
+- **Known errors in the pilot values:**
+  - Kakhovka HPP is matched from commentary, giving `dmg_econ` 0.
+  - Zmiiv TPP is dated 30 Mar (the day it was reported).
+  - The Donetsk 41k outage is attributed to RU, but it was a UA strike on occupied Donetsk.
+
+## Proposal sent to the PI (2026-11-03): action mapping and kinetic damage. Not implemented; economic part decided above.
 
 - **Hierarchy:** report → strike (built: same target and attacker within 24 h) → action → episode (lull of 48 h or more).
 - **Action:** a run of strikes by one side. It ends when the other side strikes, or after a gap of **g = 12 h** by the same side. The 12 h covers news-publication lag on overnight waves. Overlapping RU/UA actions are allowed and ordered by start time; `gap_prev` may then be negative. Alternative: group strikes by RU "attack night", using the Ukrainian Air Force daily tallies as the backbone.
@@ -105,7 +127,7 @@ Each decision is provisional unless it is marked as fixed by the brief.
 
 ## Open questions / decisions for the PI
 
-1. **Economic damage measure** (stop-and-ask). The leading candidate is capacity offline × severity. The Phase 1 registry supports capacity for RU refineries (t/yr) and UA plants (MW). Severity has no source yet for RU→UA; IntelliNews has a 0–4 damage scale for UA→RU.
+1. ~~Economic damage measure~~: decided 2026-11-03 (see above). Remaining question: ingest Ukrenergo/Ministry bulletins for customers cut off? The leading candidate is capacity offline × severity. The Phase 1 registry supports capacity for RU refineries (t/yr) and UA plants (MW). Severity has no source yet for RU→UA; IntelliNews has a 0–4 damage scale for UA→RU.
 2. **Action-merging rule** (stop-and-ask). Not implemented. The pilot stops at strike level.
 3. **UA→RU needs a separate source.** VIINA puts 1.5% of IntelliNews refinery strike-dates within 25 km of the refinery (±1 day). A text search finds 23% (3.7% in 2024, 31% in 2026). Proposal: build UA→RU strikes from IntelliNews (+ Baker, if you approve the request, + Deep Strike) and use VIINA only for RU→UA. Approve?
 4. **Attacker attribution for 2022–2024.** VIINA's initiator flags are empty, so attacker must come from our own rule or classifier. The keyword heuristic is wrong on 2 of 38 true strikes in the precision sample; both are strikes in occupied Horlivka attributed to RU. Options: (a) refine the keywords; (b) use a control map (VIINA `control` files) plus target location; (c) train a classifier on the 2025+ labelled VIINA data. I recommend (b)+(c).

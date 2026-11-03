@@ -1,0 +1,8 @@
+attacker,target_class,n_strikes,n_dmg_econ,sum_dmg_econ,n_cust,sum_cust_out
+RU,gen,41,10,0.07210338680926916,0,0
+RU,industrial,23,0,0,0,0
+RU,storage_export,18,0,0,0,0
+RU,transmission,52,0,0,6,653344
+UA,refining,6,3,0.026299694189602447,0,0
+UA,storage_export,1,0,0,0,0
+UA,transmission,1,0,0,0,0

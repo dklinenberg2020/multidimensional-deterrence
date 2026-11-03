@@ -82,10 +82,37 @@ Problems with the terms:
 
 **Caveat:** the precision labels are mine (an LLM reading headlines only). They need a human check before the precision figure is quoted.
 
-## 6. Open decisions
+## 6. Economic damage, pilot (method approved 2026-11-03; `output/pilot_econ_damage.csv`)
+
+**Method.**
+- **Named plants and refineries:** capacity as a share of national capacity × a severity weight (0–4 scale coded from headlines; weights 0 / 0.1 / 0.3 / 0.6 / 1). National capacity is 56.1 GW for Ukraine and 327 mn t/yr for Russian refining.
+- **Grid strikes:** customers left without power, taken from headlines.
+- **Everything else:** left blank and flagged.
+
+**Coverage.** Of the 142 strikes, 13 have a capacity-based damage value, 6 have a customer count, and 123 have neither. The figures below are pilot outputs; several contain known errors, listed after them.
+
+**Largest capacity-based values:**
+
+| Date | Facility | Capacity share | Severity | `dmg_econ` |
+|---|---|---|---|---|
+| 30 Mar | Zmiiv TPP | 3.9% | 4 | 0.039 |
+| 24 Mar | Saratov refinery | 2.1% | 4 | 0.021 |
+| 22 Mar | DniproHES | 2.8% | 3 | 0.017 |
+| 22 Mar | Kurakhove TPP | 2.7% | 3 | 0.016 |
+
+**Largest customer count:** Kharkiv, 600,000 without power on 22 Mar.
+
+**Known errors in these values:**
+- **Kakhovka HPP** is matched from commentary on the DniproHES strike, not from a strike on Kakhovka itself.
+- **Zmiiv TPP** carries 30 Mar, the date it was reported, not the date it was struck.
+- **The Donetsk 41k outage** is attributed to RU; it was a UA strike on occupied Donetsk.
+
+**Main fix needed:** customer counts mostly appear in Ukrenergo and Ministry bulletins, not in VIINA headlines. Ingesting those bulletins is the next step.
+
+## 7. Open decisions
 
 1. **Action-merging rule.** Proposed: an action ends at an attacker switch or after a gap of g = 12 h by the same side.
-2. **Economic damage measure.** Proposed: share of national capacity × severity, with capacity × days offline as a robustness check.
+2. **Economic damage measure: decided.** Remaining question: should we ingest the Ukrenergo and Ministry bulletins for customer counts?
 3. **Kinetic damage.** Reported deaths only, or reported plus modelled expected deaths?
 4. **UA→RU source strategy.** May I request the Baker dataset? ACLED needs the same decision.
 5. **Attacker rule for 2022–24.** Options: a control map plus target location, and/or a classifier trained on VIINA's 2025+ labels.
