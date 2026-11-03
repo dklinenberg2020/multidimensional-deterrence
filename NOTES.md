@@ -150,6 +150,22 @@ Known problems:
 - **Coverage.** Most merchant strikes are unnamed ("пошкоджено цивільне судно під прапором Ліберії"). Flag + date + port could be matched to AMPU (Ukrainian Sea Ports Authority) reports to recover names.
 - **Possible double counting.** A port strike that also damages a ship can appear both in the energy/economic layer (storage_export) and in the ship layer. To be resolved when the layers merge.
 
+## Ship name recovery: PI-approved (2026-11-03)
+
+- **AMPU (Ukrainian Sea Ports Authority) could not be used.** Its website (WordPress API; 1,473 posts) carries no per-attack vessel reports, and its per-attack posts are on Facebook, which needs a login, so it was not scraped. It does provide an aggregate benchmark: **172 civilian vessels damaged or partially destroyed, Feb 2022–Apr 2026** (USPA head, 24 Apr 2026, on uspa.gov.ua).
+- **Replacement method.** I researched 83 unnamed merchant strikes that have a flag or port clue against the maritime trade press and Ukrainian news (gCaptain, Maritime Executive, Marine Insight, Maritime Optima, Baird, BlackSeaNews, Kyiv Independent, Ukrinform, Militarnyi, Interfax-Ukraine, kmu.gov.ua). Particulars come from public VesselFinder pages. A name is kept only where an opened source ties the vessel to the event.
+  - Raw research: `data/raw/ship_identification/2026-11-03/batch{1,2}.csv`.
+  - `py/build_ship_ids.py` turns it into `registry/ship_strike_ids.csv` and adds the new vessels to `registry/vessels.csv`. It runs after `09_ships.R` and its outputs are then read by `09`; this is a curation step, not part of `run_all`.
+- **Result.** 48 of the 83 rows were identified, with 32 new vessels. Researcher-stated and same-vessel-within-3-days duplicates (30 rows) are excluded. 8 rows were not ship strikes, e.g. the Orlivka checkpoint and storm-sunk Volgoneft tankers; 5 are unclear.
+  - Merchant strikes with `dmg_econ_ship`: **14 → 35**.
+  - 23 researched strikes are real but unnamed in every source; 140 unnamed strikes remain unresearched (no flag or port in the headline).
+- **VIINA date errors found:** five "2022" stories actually happened in 2023–2025. Also Millennial Spirit (Feb 2022), shown in July 2022, and Golden Leo, shown on its sinking date. All are corrected via `actual_strike_date`.
+- **Attacker corrections:** 9, e.g. Golden Leo and Emil (RU, not UA), and the Kerch terminal strike (UA). The NS Pride attacker is unknown (an unidentified explosive device).
+- **Open:**
+  - Helt: the cause is disputed (mine vs missile), and the headline-based attacker is UA, which is likely wrong.
+  - Several DWTs rest on a database name match rather than an IMO given in the news (noted per vessel).
+  - Tedy's IMO is unconfirmed.
+
 ## Proposal sent to the PI (2026-11-03): action mapping and kinetic damage. Not implemented; economic part decided above.
 
 - **Hierarchy:** report → strike (built: same target and attacker within 24 h) → action → episode (lull of 48 h or more).
