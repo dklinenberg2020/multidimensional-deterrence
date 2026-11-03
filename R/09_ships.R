@@ -125,6 +125,13 @@ alias <- vessels |> select(vessel_id, name_variants) |> separate_rows(name_varia
   mutate(vessel_key = stri_trans_toupper(stri_trans_general(str_squish(name_variants), "Any-Latin; Latin-ASCII"))) |>
   distinct(vessel_key, .keep_all = TRUE) |> select(vessel_key, vessel_id)
 
+ids <- readr::read_csv(here("registry", "ship_strike_ids.csv"), show_col_types = FALSE,
+                       col_types = cols(.default = "c"))
+# a strike with several identified vessels keeps the first here; extra vessels become extra rows below
+ids_one <- ids |> group_by(strike_id) |> slice(1) |> ungroup() |>
+  transmute(strike_id, id_vessel_id = na_if(vessel_id, ""), id_vessel_name = na_if(vessel_name, ""),
+            id_actual_date = as.Date(na_if(actual_strike_date, "")), id_attacker = na_if(attacker, ""),
+            id_status = status, id_duplicate_of = na_if(duplicate_of, ""), id_source_url = source_url)
 strikes <- r |> group_by(strike_id, attacker, target_key) |>
   summarise(date = as.Date(min(ts), tz = "Europe/Kyiv"), time = format(min(ts), "%H:%M", tz = "Europe/Kyiv"),
             vessel_class = names(sort(table(vessel_class), decreasing = TRUE))[1],
@@ -134,6 +141,16 @@ strikes <- r |> group_by(strike_id, attacker, target_key) |>
             n_reports = n(), n_sources = n_distinct(source), headline = first(text), url = first(url),
             event_ids = paste(unique(event_id), collapse = ";"), .groups = "drop") |>
   left_join(alias, by = "vessel_key") |>
+  # ---- hand-curated identifications (registry/ship_strike_ids.csv): researched from maritime press,
+  # one source URL per row. Can (i) attach a vessel to an unnamed strike, (ii) correct date/attacker,
+  # (iii) mark a strike as not a ship strike, (iv) mark it a duplicate of another strike.
+  left_join(ids_one, by = "strike_id") |>
+  mutate(vessel_id = coalesce(id_vessel_id, vessel_id),
+         vessel_name = coalesce(id_vessel_name, vessel_name),
+         date_reported = date,
+         date = coalesce(id_actual_date, date),
+         attacker = coalesce(id_attacker, attacker),
+         id_source_url = id_source_url) |>
   left_join(vessels |> select(vessel_id, imo, vessel_type, flag, dwt, military, dwt_source_url = source_url), by = "vessel_id") |>
   # registry overrides headline wording: naval auxiliaries (e.g. Navy cable ships) count as warships
   mutate(vessel_class = case_when(coalesce(military, "") == "TRUE" ~ "warship",
@@ -152,10 +169,38 @@ strikes <- r |> group_by(strike_id, attacker, target_key) |>
            is.na(severity) ~ "severity not codable",
            TRUE ~ "other"),
          dmg_kin = NA_real_)   # kinetic damage not yet implemented (decision pending)
+# extra vessels identified in the same strike -> one row each (suffix _v2, _v3, ...)
+extra <- ids |> group_by(strike_id) |> mutate(j = row_number()) |> ungroup() |> filter(j > 1, status == "ship_strike")
+if (nrow(extra)) {
+  add <- strikes |> inner_join(extra |> select(strike_id, j, x_vid = vessel_id, x_vname = vessel_name, x_src = source_url), by = "strike_id") |>
+    mutate(strike_id = paste0(strike_id, "_v", j), vessel_id = x_vid, vessel_name = x_vname, id_source_url = x_src) |>
+    select(-j, -x_vid, -x_vname, -x_src)
+  strikes <- bind_rows(strikes, add)
+}
+# re-attach registry particulars for vessels attached by the ids file, then recompute damage
+strikes <- strikes |> select(-any_of(c("imo", "vessel_type", "flag", "dwt", "military", "dwt_source_url"))) |>
+  left_join(vessels |> select(vessel_id, imo, vessel_type, flag, dwt, military, dwt_source_url = source_url), by = "vessel_id") |>
+  mutate(vessel_class = case_when(coalesce(military, "") == "TRUE" ~ "warship",
+                                  coalesce(military, "") == "FALSE" & vessel_class == "warship" ~ "merchant_generic",
+                                  TRUE ~ vessel_class),
+         target_class = if_else(vessel_class == "warship", "warship", "shipping"),
+         id_status = coalesce(id_status, "unreviewed"),
+         dmg_econ_ship = if_else(target_class == "shipping" & id_status %in% c("ship_strike", "unreviewed"), dwt * sev_weight, NA_real_),
+         econ_flag = case_when(
+           id_status == "not_ship_strike" ~ "reviewed: not a ship strike (excluded)",
+           id_status == "duplicate" ~ paste("reviewed: duplicate of", id_duplicate_of),
+           target_class == "warship" ~ "warship: kinetic only (PI decision)",
+           !is.na(dmg_econ_ship) ~ NA_character_,
+           id_status == "ship_strike" & is.na(vessel_id) ~ "reviewed: vessel not identified in sources",
+           is.na(vessel_name) ~ "merchant vessel not named in headlines",
+           is.na(vessel_id) ~ "named vessel not yet in registry/vessels.csv",
+           is.na(dwt) ~ "DWT missing in registry",
+           is.na(severity) ~ "severity not codable",
+           TRUE ~ "other"))
 arrow::write_parquet(strikes, interim("ship_strikes.parquet"))
-readr::write_csv(strikes |> select(strike_id, date, time, attacker, target_class, vessel_class, shadow_fleet, location,
-                                   vessel_name, vessel_id, imo, dwt, severity, sev_weight, dmg_econ_ship, econ_flag,
-                                   n_reports, n_sources, headline, url),
+readr::write_csv(strikes |> select(strike_id, date, date_reported, time, attacker, target_class, vessel_class, shadow_fleet, location,
+                                   vessel_name, vessel_id, imo, dwt, severity, sev_weight, dmg_econ_ship, econ_flag, id_status,
+                                   n_reports, n_sources, headline, url, id_source_url),
                  out("ship_strikes.csv"))
 
 # Named merchant vessels to look up (feeds registry/vessels.csv)
@@ -166,7 +211,7 @@ names_tbl <- strikes |> filter(target_class == "shipping", !is.na(vessel_name)) 
   arrange(first_date)
 readr::write_csv(names_tbl, out("ship_vessel_names.csv"))
 
-summ <- strikes |> mutate(year = year(date)) |>
+summ <- strikes |> filter(!id_status %in% c("not_ship_strike", "duplicate")) |> mutate(year = year(date)) |>
   group_by(year, attacker, target_class) |>
   summarise(n_strikes = n(), n_named = sum(!is.na(vessel_name)), n_dwt = sum(!is.na(dwt)),
             sum_dmg_econ_ship = sum(dmg_econ_ship, na.rm = TRUE), .groups = "drop")
