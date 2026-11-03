@@ -1,0 +1,37 @@
+facility_id,intellinews_name,ruwiki_title,name_en,class,plant_share_note,place_regex
+RU_REF_RYAZAN,Ryazan,Рязанский нефтеперерабатывающий завод,Ryazan refinery,refining,,рязан
+RU_REF_MOSCOW,Moscow (Kapotnya),Московский нефтеперерабатывающий завод,Moscow refinery (Kapotnya),refining,,капотн|московск\w* нпз|московськ\w* нпз
+RU_REF_KIRISHI,Kirishi (KINEF),Киришинефтеоргсинтез,Kirishi refinery (KINEF),refining,,кириш|кіриш
+RU_REF_YANOS,Yaroslavl (Slavneft-YANOS),Ярославнефтеоргсинтез,Yaroslavl refinery (Slavneft-YANOS),refining,,ярослав
+RU_REF_KSTOVO,"Nizhny Novgorod (Lukoil NORSI, Kstovo)",Лукойл-Нижегороднефтеоргсинтез,Kstovo refinery (Lukoil NORSI),refining,,кстов|нижегород|нижньогород|норси
+RU_REF_VOLGOGRAD,Volgograd,Лукойл-Волгограднефтепереработка,Volgograd refinery,refining,,волгоград
+RU_REF_SARATOV,Saratov,Саратовский нефтеперерабатывающий завод,Saratov refinery,refining,,саратов
+RU_REF_SYZRAN,Syzran,Сызранский нефтеперерабатывающий завод,Syzran refinery,refining,,сызран|сизран
+RU_REF_NOVOKUIB,Novokuibyshevsk,Новокуйбышевский нефтеперерабатывающий завод,Novokuibyshevsk refinery,refining,,новокуйбыш|новокуйбиш
+RU_REF_KUIBYSHEV,Kuibyshev (Samara),Куйбышевский нефтеперерабатывающий завод,Kuibyshev refinery (Samara),refining,,куйбыш|куйбиш|самар
+RU_REF_TUAPSE,Tuapse,Туапсинский нефтеперерабатывающий завод,Tuapse refinery,refining,,туапс
+RU_REF_AFIPSKY,Afipsky,Афипский нефтеперерабатывающий завод,Afipsky refinery,refining,,афип|афіп
+RU_REF_ILSKY,Ilsky,Ильский нефтеперерабатывающий завод,Ilsky refinery,refining,,ильск|ільськ
+RU_REF_SLAVYANSK,Slavyansk ECO,,Slavyansk ECO refinery,refining,no ru.wikipedia article with coordinates found,славянск\w*[- ]на[- ]кубан|слов.янськ\w*[- ]на[- ]кубан|славянск эко|слов.янськ еко
+RU_REF_KRASNODAR,Krasnodar,Краснодарский нефтеперерабатывающий завод,Krasnodar refinery,refining,,краснодар
+RU_REF_NOVOSHAKHT,Novoshakhtinsk,Новошахтинский завод нефтепродуктов,Novoshakhtinsk refinery,refining,,новошахт
+RU_REF_UFANEFTEKHIM,"Ufa group (Bashneft: Ufaneftekhim, Novoil, UNPZ)",Башнефть-Уфанефтехим,Bashneft-Ufaneftekhim,refining,IntelliNews gives only the group total (23.4) so per-plant capacity is NA,\bуф[аиыіе]\b|башнефт|уфанефтех|новойл
+RU_REF_NOVOIL,"Ufa group (Bashneft: Ufaneftekhim, Novoil, UNPZ)",Башнефть-Новойл,Bashneft-Novoil,refining,IntelliNews gives only the group total (23.4) so per-plant capacity is NA,\bуф[аиыіе]\b|башнефт|уфанефтех|новойл
+RU_REF_UNPZ,"Ufa group (Bashneft: Ufaneftekhim, Novoil, UNPZ)",Башнефть-УНПЗ,Bashneft-UNPZ (Ufa refinery),refining,IntelliNews gives only the group total (23.4) so per-plant capacity is NA,\bуф[аиыіе]\b|башнефт|уфанефтех|новойл
+RU_REF_SALAVAT,Salavat,Газпром нефтехим Салават,Gazprom Neftekhim Salavat,refining,,салават
+RU_REF_TANECO,Nizhnekamsk (TANECO),Танеко,TANECO (Nizhnekamsk),refining,,нижнекамск|нижньокамськ|танеко
+RU_REF_TAIFNK,Nizhnekamsk (TAIF-NK),ТАИФ-НК,TAIF-NK (Nizhnekamsk),refining,,нижнекамск|нижньокамськ|таиф|таіф
+RU_REF_PERM,Perm (Lukoil),Лукойл-Пермнефтеоргсинтез,Perm refinery (Lukoil),refining,,перм
+RU_REF_ORSK,Orsk,Орскнефтеоргсинтез,Orsk refinery,refining,,\bорск|\bорськ
+RU_REF_OMSK,Omsk,Омский нефтеперерабатывающий завод,Omsk refinery,refining,,\bомск|\bомськ
+RU_REF_TYUMEN,Tyumen (Antipinsky),Тюменский нефтеперерабатывающий завод,Tyumen (Antipinsky) refinery,refining,,тюмен|антипин
+RU_REF_UKHTA,Ukhta (Lukoil),ЛУКОЙЛ-Ухтанефтепереработка,Ukhta refinery (Lukoil),refining,,ухт
+RU_REF_PERVYI,Pervyi Zavod (Kaluga mini-refinery),,Pervyi Zavod (Kaluga),refining,no ru.wikipedia article with coordinates found,калуг|калуз|калужск|калузьк
+RU_REF_NEVSKY,Nevsky Mazut (St Petersburg),,Nevsky Mazut (St Petersburg),refining,no ru.wikipedia article with coordinates found,невск\w* мазут|невськ\w* мазут
+RU_REF_ACHINSK,,Ачинский нефтеперерабатывающий завод,Achinsk refinery,refining,listed by IntelliNews as not hit; capacity not given,
+RU_REF_ANGARSK,,Ангарская нефтехимическая компания,Angarsk Petrochemical Company,refining,listed by IntelliNews as not hit; capacity not given,
+RU_REF_KOMSOMOLSK,,Комсомольский нефтеперерабатывающий завод,Komsomolsk refinery,refining,listed by IntelliNews as not hit; capacity not given,
+RU_REF_KHABAROVSK,,Хабаровский нефтеперерабатывающий завод,Khabarovsk refinery,refining,listed by IntelliNews as not hit; capacity not given,
+RU_OTH_USTLUGA,Ust-Luga (Novatek) CONDENSATE PLANT,,Ust-Luga condensate fractionation (Novatek),storage_export,condensate not crude; no ru.wikipedia article in refinery category,усть-луг
+RU_OTH_ASTRAKHAN_GPP,Astrakhan GAS PROCESSING PLANT,,Astrakhan gas processing plant,industrial,capacity is condensate unit only,астрахан
+RU_OTH_SURGUT_ZSK,Surgut CONDENSATE STABILISATION PLANT,Сургутский ЗСК,Surgut condensate stabilisation plant,industrial,crude+condensate mix,сургут

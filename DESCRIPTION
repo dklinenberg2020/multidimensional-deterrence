@@ -1,0 +1,5 @@
+Package: deterTwoDim
+Title: Russia-Ukraine action-level damage dataset (pipeline dependencies)
+Version: 0.0.1
+Imports: pacman, here, tidyverse, arrow, data.table, stringi, lubridate, sf, s2,
+    httr2, jsonlite, rnaturalearth, rnaturalearthdata, rnaturalearthhires, scales, knitr

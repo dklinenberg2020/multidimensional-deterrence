@@ -1,0 +1,99 @@
+# NOTES: running log
+
+Project: an action-level dataset of strikes in the Russia–Ukraine war, with a kinetic and an economic damage per action. Full plan: https://claude.ai/artifact/LckpVR3Y9VquLcvtfECyhW
+
+Newest entries go at the top of each section. Phase 1 started on 2026-11-03.
+
+---
+
+## How to run
+
+```sh
+Rscript -e 'renv::restore()'   # once, on a fresh clone (R 4.3.3; lockfile = renv.lock)
+Rscript R/run_all.R            # runs 01..07 from the repo root
+```
+
+- System libraries that `sf`/`s2`/`arrow` need on Ubuntu 24.04: `libgdal-dev libgeos-dev libproj-dev libudunits2-dev libcurl4-openssl-dev libssl-dev libxml2-dev`. For building from source, `renv::restore()` also asks for `gdal-bin libabsl-dev libfribidi-dev libharfbuzz-dev libuv1-dev`. Binaries from the Posit package manager worked without them.
+- `.Renviron` forces a UTF-8 locale. Without it, Rscript in a C locale corrupts Cyrillic string literals; this bit `04_build_registry.R` once.
+- Large raw pulls (`data/raw/viina/`) and everything in `data/interim/` are git-ignored. They are re-created by the scripts: VIINA is pinned to a commit in `R/00_setup.R`. Small raw pulls are committed, because the live sources change daily (IntelliNews, Wikipedia, Wikidata).
+- `RAW_DATE` (environment variable, default `2026-11-03`) selects the `data/raw/<source>/<date>/` folder. To re-pull, set a new date.
+- `output/gap_log.csv` records every deliberate NA, with counts. Each script overwrites its own rows on each run.
+
+## Pipeline map
+
+| Script | Does | Main output |
+|---|---|---|
+| `01_ingest_viina.R` | Downloads `event_info` + `event_labels` 2022–2026 at the pinned commit, joins them, drops the low-AUC variable | `data/interim/viina_events.parquet` (591,923 events) |
+| `02_size_job.R` | Monthly counts: all events, `t_property`, each actor flag | `output/monthly_counts.{csv,png}` |
+| `03_dict_hits.R` | Applies `dict/econ_targets.csv` to the headlines | `output/dict_hits_by_*.csv` |
+| `04_build_registry.R` | Seeds the facility registry | `registry/facilities.csv` |
+| `05_russia_coverage.R` | Russia geocoding share; IntelliNews refinery-date coverage | `output/russia_share_by_year.csv`, `output/refinery_strike_coverage*.csv` |
+| `06_pilot_classify_match.R` | March 2024: classify, attribute attacker, match facilities, de-duplicate | `data/interim/pilot_2024_03_{reports,strikes}.parquet`, `output/pilot_precision_sample.csv` |
+| `07_pilot_score.R` | Recall against the reference list; precision from the hand labels | `output/pilot_scores.csv`, `output/pilot_recall_*.csv` |
+
+---
+
+## Decisions taken (Phase 1)
+
+Each decision is provisional unless it is marked as fixed by the brief.
+
+1. **VIINA version.** VIINA is pinned to commit `a1ad3633…` (main, 2026-10-27). I use the raw `event_info` + `event_labels` files, not the `event_1pd` one-per-day files: our own de-duplication rule has to run on raw reports.
+2. **AUC filter.** VIINA's `Diagnostics/classification_report_bert.csv` is not a CSV: it is a saved GitHub HTML page (see Source quirks). The AUCs are therefore parsed from the detailed BERT table in VIINA's README at the pinned commit (`output/viina_auc.csv`). Only `t_cyber` (AUC 0.754) falls below 0.80, and it is dropped. `t_airalert` passes in that table, though it scored 0.808 in the older table.
+3. **Actor flags with missing values.** A month in which more than 50% of an actor flag is NA is reported as NA, not 0 (see the quirk below).
+4. **Recognised borders.** Natural Earth 1:10m admin-0 polygons are used. NE draws Crimea inside the RUS polygon, so an event counts as "in Russia" only if it is inside RUS **and not** inside UKR. Occupied territory counts as Ukraine.
+5. **Dictionary format.** Each row holds two ICU regexes (`term_ua`, `term_ru`), matched against the lower-cased headline. `term_ua` is applied to `lang == "ua"` headlines and `term_ru` to `lang == "ru"`. I added a 4th column, `specific`: FALSE marks generic or ambiguous terms (e.g. "термінал", "завод", "енергосистема", "знеструмлення"), so counts can be reported with and without them. The generic "energy infrastructure/object" phrase is assigned to `gen` and outage words to `transmission`. These two assignments are judgement calls.
+6. **Registry sources.**
+   - Russian refineries: nameplate capacity from the IntelliNews sheet (mn t/yr × 1e6 → t/yr). Where the sheet lists conflicting values, the first, headline value is taken; the full text is kept in `capacity_note`. Coordinates come from ru.wikipedia, via the hand-made crosswalk `registry/ru_refinery_crosswalk.csv`. The Ufa group's capacity (23.4) is NA per plant, because IntelliNews does not attribute the 9.5 / 7.3 / 6.6 split to individual plants.
+   - Ukrainian plants: Wikidata (P625 coordinates, P2109 nominal MW, taken as the pre-war nameplate), plus uk.wikipedia coordinates for the hand-picked list in `registry/ua_plants_supplement.csv`.
+   - Exclusions: Crimean plants built after 2014 are left out (not part of the pre-war Ukrainian grid). Shchedrivska HES has P2109 = 640 MW, which is implausible for a micro-hydro, so its capacity is set to NA.
+   - Two extra columns, `capacity_note` and `note`, are kept beyond the brief's schema.
+7. **Pilot classification** (in `06`): a report counts as an economic strike if it has (a) a dictionary hit, AND (b) a strike cue (удар/атак/ракет/дрон/шахед/пошкод/уламк/знеструм…) OR `t_property_b == 1`, AND NOT (c) a restoration/legal/price headline without a strike cue. The target class is the most specific class hit, in the order refining > storage_export > gen > transmission > industrial.
+8. **Pilot attacker.** VIINA's initiator flags are empty in 2024, so the attacker comes from a heuristic. It is UA if the headline names Russian territory, the "DNR/LNR" authorities, a Russian refinery or oil depot, or "ВСУ обстрел…"; otherwise it is RU. **This needs your review** (see Open questions).
+9. **Pilot facility match.**
+   - First by name: an alias regex is built from the registry stem plus a type word (ТЕС/ТЕЦ/ГЕС/НПЗ…), plus three hand aliases (ДніпроГЕС, Трипільська, Зміївська). The aliases are in `output/pilot_facility_aliases.csv`.
+   - Otherwise spatially: a facility within 10 km, in the same Natural Earth admin-1 unit (Kyiv City merged into Kyiv oblast), and of the same class. The spatial match is used only for STREET/ADM3-precision geocodes.
+10. **Pilot de-duplication** (fixed by the brief: same target and attacker within 24 h).
+    - Target = `facility_id` if matched, else class × oblast × VIINA populated place (`geonameid`).
+    - Windows are anchored at the first report of each strike, so follow-up reports cannot chain a strike past 24 h.
+    - The timestamp is VIINA `date` + `time`, read as Kyiv time.
+11. **Recall reference.** The energy-map.info file needs an account (see Blocked sources). In its place I compiled a provisional reference list of March 2024 attacks on energy by hand from public reporting; every row has a source URL (`data/raw/manual_reference/2026-11-03/`). Recall against energy-map itself is still to do.
+12. **Precision labels.** I (Claude) labelled the 50-strike sample from the headline text only. These labels are not human-verified, and the file says so (`data/raw/manual_labels/2026-11-03/pilot_precision_labels.csv`).
+
+---
+
+## Source quirks
+
+- **VIINA initiator flags missing in 2022–2024.** `a_rus_init`/`a_ukr_init` (and their `_b` versions) are NA for 99.4% of 2022 events and 100% of 2023–2024 events. They are populated from 2025 on. The 2022–2024 files were all coded by one model release (`bert_20250404…`), and 2025 and 2026 by later releases (`bert_20260320…`, `bert_20261027…`). Use `a_rus_b`/`a_ukr_b` ("involves") for the early period, or our own attribution.
+- **VIINA source and volume break at 2025.** RIA stops in 2025 and NV restarts in 2026. Liveuamap falls from 62k reports (2023) to 3.7k (2026). Total reports fall from 260k (2022) to 42k (2026), while the `t_property` share rises from 6% to 31%. Monthly counts are **not comparable across the 2024/25 break**: the plot marks it.
+- **VIINA geocodes almost nothing in Russia.** Of the 26,063 events whose coordinates fall in Russia, 23,490 (90%) have a geocoder address string that begins "Украина/Україна". These are mis-geocodes: e.g. "Украина, Киев" placed at the Moscow centroid (55.7N, 37.6E), or at 28.6N, 77.2E (Delhi). Strikes on Russian refineries are geocoded to Ukrainian namesakes, e.g. "Ильский НПЗ" placed at Kropyvnytskyi.
+- **`classification_report_bert.csv`** in VIINA's repo is HTML, not CSV.
+- **VIINA `time`** looks like Kyiv local publication time (DniproHES reports on 22 Mar 2024 start at 08:20). The README does not say. An earlier bug converted Kyiv timestamps to UTC dates; it is fixed in `06`.
+- **Wikidata** has P2109 for most large TPPs and HPPs but not for Burshtyn, Trypillia, Prydniprovska or the pumped-storage plants (PSPs). Those capacities are NA in the registry.
+- **Wikipedia API**: `prop=coordinates` returns at most 10 pages unless `colimit=max` is set. Fixed.
+- **IntelliNews sheet** is updated daily. The snapshot used is the 2 Nov 2026 version, saved in `data/raw/intellinews/2026-11-03/`. The sheet notes that its strike counts are floors and that some 2026 dates "may be the same night counted twice" (Yaroslavl).
+
+## Blocked or restricted sources (not worked around)
+
+| Source | Status | Needed action |
+|---|---|---|
+| energy-map.info / map.ua-energy.org "massive strikes" (DiXi Group) | Downloading needs a registered account (Terms 5.1.1). The free page shows a "download limit" wall. The listed English file is `2024_08_26`, last updated 2024-10-01, 81 rows. | **Manual download requested.** Put the CSV/XLSX in `data/raw/energymap/<date>/`. `07` will then need a parser. |
+| Kaggle "massive-missile-attacks-on-ukraine" (piterfm) | The API redirects to login; no Kaggle credentials in this environment. Third-party GitHub copies exist; not used. | **Manual download requested**, into `data/raw/kaggle_mmau/<date>/`. |
+| Baker Institute dataset (Collins, refinery and energy strikes Apr 2022–Feb 2026) | bakerinstitute.org returns 403 to scripts. Reporting describes the dataset as "available upon request". | **Ask before requesting access** (brief rule). Coverage in Phase 1 uses IntelliNews only. |
+| ACLED (Ukraine + Russia, and the infrastructure-tag file) | Needs an account; the infrastructure file is restricted. | Not requested: **ask first.** |
+| Deep Strike (deepstrike.live) | Reachable (308 redirect) but not yet explored. | Phase 2. |
+| OpenStreetMap Overpass API | The connection is reset by the egress proxy (both mirrors). | I used Wikipedia/Wikidata instead. Overpass would give better facility polygons, if network policy allows it. |
+
+---
+
+## Open questions / decisions for the PI
+
+1. **Economic damage measure** (stop-and-ask). The leading candidate is capacity offline × severity. The Phase 1 registry supports capacity for RU refineries (t/yr) and UA plants (MW). Severity has no source yet for RU→UA; IntelliNews has a 0–4 damage scale for UA→RU.
+2. **Action-merging rule** (stop-and-ask). Not implemented. The pilot stops at strike level.
+3. **UA→RU needs a separate source.** VIINA puts 1.5% of IntelliNews refinery strike-dates within 25 km of the refinery (±1 day). A text search finds 23% (3.7% in 2024, 31% in 2026). Proposal: build UA→RU strikes from IntelliNews (+ Baker, if you approve the request, + Deep Strike) and use VIINA only for RU→UA. Approve?
+4. **Attacker attribution for 2022–2024.** VIINA's initiator flags are empty, so attacker must come from our own rule or classifier. The keyword heuristic is wrong on 2 of 38 true strikes in the precision sample; both are strikes in occupied Horlivka attributed to RU. Options: (a) refine the keywords; (b) use a control map (VIINA `control` files) plus target location; (c) train a classifier on the 2025+ labelled VIINA data. I recommend (b)+(c).
+5. **Occupied-territory strikes** (UA strikes on Donetsk, Horlivka, Crimea). Attacker = UA, but are these "UA→RU" actions or a separate category?
+6. **Generic energy headlines** ("пошкоджено об'єкт енергетичної інфраструктури") carry no facility. Should they become strikes with `facility_id` NA and an oblast-level capacity proxy, or be held back until a named report matches them?
+7. **ZNPP news.** АЕС/АЭС is the second-largest dictionary term (4,187 hits), mostly about the occupied ZNPP. Should ZNPP be excluded outright, or require a strike cue plus ZNPP-specific terms?
+8. **VIINA timestamp timezone.** It looks like Kyiv local time. Confirm with the VIINA authors?
+9. **Recall reference.** Can you download energy-map.info (and Kaggle) manually? The provisional list is built from news and official statements.
+10. **Human check of precision labels.** The 50 labels are mine; a human pass is needed before the precision figure is quoted.
