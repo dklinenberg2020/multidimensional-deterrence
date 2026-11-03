@@ -16,19 +16,7 @@ st_txt <- strikes |> select(strike_id, event_ids) |> separate_rows(event_ids, se
   left_join(reports |> distinct(event_id, .keep_all = TRUE), by = "event_id") |>
   mutate(tl = stri_trans_tolower(text))
 
-# ---- severity: 0-4 scale (IntelliNews definitions), coded from headlines; max over a strike's reports
-# 4 halted/destroyed · 3 major damage · 2 damaged/hit · 1 fire or minor · 0 attacked/claimed only
-sev_rx <- list(
-  `4` = "зруйнован|знищен|разрушен|уничтожен|повністю зупин|полностью останов|зупинила роботу|остановила работу|вивели з ладу|выведен\\w* из строя",
-  `3` = "серйозн\\w* пошкодж|значн\\w* пошкодж|серьезн\\w* поврежд|значительн\\w* поврежд|критичн\\w* пошкодж|втрат\\w* \\d+% генерац",
-  `2` = "пошкодж|поврежд|влучан|влучил|попадан|прил[іе]т|уражен|поражен|вибуховою хвилею",
-  `1` = "пожеж|пожар|загоран|загорі|загорел|уламк|обломк",
-  `0` = "атак|обстр|удар")
-sev_of <- function(t) {
-  for (k in names(sev_rx)) if (!is.na(t) && stri_detect_regex(t, sev_rx[[k]])) return(as.integer(k))
-  NA_integer_
-}
-sev_w <- c(`0` = 0, `1` = 0.1, `2` = 0.3, `3` = 0.6, `4` = 1)   # PI-approved weights
+# ---- severity: sev_of() / sev_w are defined in 00_setup.R (shared with 09_ships.R)
 
 # ---- customers without power: "<n> [тис.] <customer noun>" in a headline with an outage word
 outage_rx <- "без світла|без света|знеструм|обесточ|відключен|отключен|без електро|без электро|без енергопостач"

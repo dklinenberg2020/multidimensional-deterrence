@@ -23,7 +23,9 @@ noise_cue   <- "ремонт|відновил|восстановил|відно�
 r <- r |>
   mutate(cue_strike = str_detect(tl, strike_cue),
          cue_noise  = str_detect(tl, noise_cue) & !str_detect(tl, "удар|атак|обстр|ракет|дрон|шахед"),
-         econ = hit_any & (cue_strike | t_property_b == 1) & !cue_noise)
+         # ship strikes are handled whole-period by 09_ships.R, so the shipping class is not used here
+         econ = (hit_refining | hit_storage_export | hit_gen | hit_transmission | hit_industrial) &
+                (cue_strike | t_property_b == 1) & !cue_noise)
 
 # Target class: most specific class hit, priority refining > storage_export > gen > transmission > industrial.
 cls_order <- c("refining", "storage_export", "gen", "transmission", "industrial")

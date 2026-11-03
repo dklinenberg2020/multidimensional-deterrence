@@ -22,3 +22,19 @@ log_gap <- function(script, what, n, note = "") {
   row <- tibble(ts = format(Sys.time(), "%Y-%m-%d %H:%M:%S"), script, what, n = as.numeric(n), note)
   readr::write_csv(bind_rows(old, row), f, na = "")
 }
+
+# ---- Severity coder, shared by 08 and 09: 0-4 scale (IntelliNews definitions), coded from a
+# lower-cased headline; callers take the max over a strike's reports.
+# 4 halted/destroyed · 3 major damage · 2 damaged/hit · 1 fire or minor · 0 attacked/claimed only
+sev_rx <- list(
+  `4` = "зруйнован|знищен|разрушен|уничтожен|повністю зупин|полностью останов|зупинила роботу|остановила работу|вивели з ладу|выведен\\w* из строя|затону|затонул|потоплен|потопил|потопи",
+  `3` = "серйозн\\w* пошкодж|значн\\w* пошкодж|серьезн\\w* поврежд|значительн\\w* поврежд|критичн\\w* пошкодж|втрат\\w* \\d+% генерац",
+  `2` = "пошкодж|поврежд|влучан|влучил|влучи|попал|уразил|уражено|підбит|подбит|попадан|прил[іе]т|уражен|поражен|вибуховою хвилею",
+  `1` = "пожеж|пожар|загоран|загорі|загорел|уламк|обломк",
+  `0` = "атак|обстр|удар")
+sev_of <- function(t) {
+  for (k in names(sev_rx)) if (!is.na(t) && stri_detect_regex(t, sev_rx[[k]])) return(as.integer(k))
+  NA_integer_
+}
+sev_w <- c(`0` = 0, `1` = 0.1, `2` = 0.3, `3` = 0.6, `4` = 1)   # PI-approved weights
+

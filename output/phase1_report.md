@@ -109,7 +109,22 @@ Problems with the terms:
 
 **Main fix needed:** customer counts mostly appear in Ukrenergo and Ministry bulletins, not in VIINA headlines. Ingesting those bulletins is the next step.
 
-## 7. Open decisions
+## 7. Ship strikes, 2022–Oct 2026 (`output/ship_strikes.csv`, method in NOTES.md)
+
+- **Counts:** 571 ship strikes, 333 against warships and 238 against merchant ships.
+- **Location:** a sea area instead of an oblast. Black Sea 522, Sea of Azov 29, Danube 14, other 5.
+- **Warships:** kinetic only.
+- **Merchant ships:** damage = DWT × severity, with DWT from `registry/vessels.csv` (sourced). Only 15 merchant strikes name a vessel, and 14 of those have DWT.
+- **Largest values:**
+  - Namura Queen (85,065 DWT; severity 2) = 25,520;
+  - Golden Leo (sank; 7,334);
+  - Mariam M (2,533).
+- **Precision** (LLM labels; not human-verified): warships 70% strict / 80% lenient, merchant ships 65% / 80%.
+- **Known problems:**
+  - VIINA dates some ship stories to retrospectives or to the date the ship sank.
+  - The fleet-share denominator is still open.
+
+## 8. Open decisions
 
 1. **Action-merging rule.** Proposed: an action ends at an attacker switch or after a gap of g = 12 h by the same side.
 2. **Economic damage measure: decided.** Remaining question: should we ingest the Ukrenergo and Ministry bulletins for customer counts?

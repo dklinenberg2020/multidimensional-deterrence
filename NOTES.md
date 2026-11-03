@@ -118,6 +118,38 @@ Each decision is provisional unless it is marked as fixed by the brief.
   - Zmiiv TPP is dated 30 Mar (the day it was reported).
   - The Donetsk 41k outage is attributed to RU, but it was a UA strike on occupied Donetsk.
 
+## Ships: PI decision (2026-11-03), implemented whole-period in `R/09_ships.R`
+
+PI decisions:
+- Option (b): merchant-ship damage = deadweight tonnage (DWT) × severity.
+- Location matters little for ships, so a ship gets a sea-area label (Black Sea, Sea of Azov, Baltic Sea, Danube, Mediterranean, Caspian) instead of an oblast.
+- Warships: kinetic only (recommended, and not objected to).
+
+Method:
+- **Dictionaries.** `dict/vessel_terms.csv` sorts vessel words into classes: tanker / cargo / generic merchant / warship. `dict/econ_targets.csv` gains a `shipping` class. The pilot (06) ignores `shipping`, so the March 2024 pilot and its labelled sample are unchanged.
+- **What counts as a ship strike:** a vessel word and a strike word **within 6 words** of each other. Excluded: fleet HQ and buildings, naval drones as targets, retrospectives, warnings, ship-repair yards, and courts ("суд"). Red Sea and Houthi stories are out of scope; they are dropped and logged.
+- **Vessel names:** taken only when the name directly follows a vessel noun ("суховантаж MARIAM M", "пором «Славянін»"), with a stoplist for weapons and outlets.
+- **De-duplication:** same vessel + attacker within 72 h for named vessels; sea area × vessel class × attacker within 24 h for unnamed ones.
+- **Vessel registry:** `registry/vessels.csv` holds IMO, type, flag, DWT and a `military` flag, with a source URL per row. DWT comes mostly from public VesselFinder pages, cross-checked with news; Equasis was not used. The registry overrides the headline wording: naval auxiliaries (the Project 15310 cable ships Volga and Vyatka) count as warships, and merchant ships such as Helt count as merchant.
+- **`dmg_econ_ship`** = DWT × severity weight, using the same 0–4 headline coder as plants. Ship words have been added to it ("затонуло" → 4; "влучив/попал/уразили" → 2).
+
+Result:
+- 571 ship strikes in 2022–Oct 2026: 333 warship and 238 merchant.
+- Locations: Black Sea 522, Sea of Azov 29, Danube 14, Baltic 2, Mediterranean 2, Caspian 1.
+- Only 15 merchant strikes name a vessel, and 14 of those have DWT.
+
+**Precision** (`data/raw/manual_labels/2026-11-03/ship_precision_labels.csv`). I labelled 40 sampled strikes myself (an LLM reading the headline only); they are not human-verified, and were labelled before the final attacker/term fixes:
+- Warships: 70% strict / 80% lenient.
+- Merchant ships: 65% / 80%.
+- Attacker errors among true strikes: warships 5/14 wrong (Russian strikes on Ukrainian boats; a rule was added afterwards). Merchant ships: 1/13 wrong, 5/13 missing.
+
+Known problems:
+- **VIINA dates are sometimes wrong for ships.** MJ Pinar (struck 11 Mar 2025) is dated 2022-03-12. Millennial Spirit (struck 25 Feb 2022) shows up in July 2022 retrospectives. Golden Leo carries its sinking date (26 Jul 2026), not the strike date (19 Jul). The registry `note` column records the true dates.
+- **Severity is often 0 when casualties are reported** ("ударила … чотири загинули"). A casualty-based floor is needed once `dmg_kin` is built.
+- **Fleet-share denominator (open).** `dmg_econ_ship` is in DWT-weighted tonnes. The proposal was "a share of the relevant fleet", and that fleet still needs choosing: e.g. Black Sea grain-corridor traffic for RU→UA, Russia's tanker/ferry fleet for UA→RU.
+- **Coverage.** Most merchant strikes are unnamed ("пошкоджено цивільне судно під прапором Ліберії"). Flag + date + port could be matched to AMPU (Ukrainian Sea Ports Authority) reports to recover names.
+- **Possible double counting.** A port strike that also damages a ship can appear both in the energy/economic layer (storage_export) and in the ship layer. To be resolved when the layers merge.
+
 ## Proposal sent to the PI (2026-11-03): action mapping and kinetic damage. Not implemented; economic part decided above.
 
 - **Hierarchy:** report → strike (built: same target and attacker within 24 h) → action → episode (lull of 48 h or more).
@@ -126,6 +158,8 @@ Each decision is provisional unless it is marked as fixed by the brief.
 - **`dmg_econ`:** capacity as a share of national capacity × a severity weight. IntelliNews's 0–4 damage scale maps to 0 / 0.1 / 0.3 / 0.6 / 1; RU→UA severity would be coded from the reports. Robustness check: capacity × days offline. Unnamed grid strikes stay NA, or are measured by customers cut off, or by an oblast proxy (PI to decide).
 
 ## Open questions / decisions for the PI
+
+0. **Ships:** (a) denominator for "share of the relevant fleet"; (b) recover names for unnamed merchant ships from AMPU reports?
 
 1. ~~Economic damage measure~~: decided 2026-11-03 (see above). Remaining question: ingest Ukrenergo/Ministry bulletins for customers cut off? The leading candidate is capacity offline × severity. The Phase 1 registry supports capacity for RU refineries (t/yr) and UA plants (MW). Severity has no source yet for RU→UA; IntelliNews has a 0–4 damage scale for UA→RU.
 2. **Action-merging rule** (stop-and-ask). Not implemented. The pilot stops at strike level.
