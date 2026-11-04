@@ -21,7 +21,7 @@ UNNAMED_DUPS = {18: 7, 19: 7, 38: 37, 41: 40, 53: 51, 76: 75}
 # duplicates ACROSS review files (each review file only saw its own rows):
 #  26 Dec 2025 Odesa/Mykolaiv drone attack (Slovak/Palau/Liberian ships) -> primary row 172
 #  Valery Gorchakov, Rostov-on-Don 18 Dec 2025 -> primary row 183
-CROSS_DUPS = {173: 172, 179: 172, 184: 183}
+CROSS_DUPS = {173: 172, 174: 172, 179: 172, 184: 183}
 # sea-area corrections stated by researchers
 LOCATION = {57: "Black Sea", 72: "Sea of Azov", 80: "Sea of Azov"}
 # headline-named strikes (already in output/ship_strike.csv) whose VIINA date is wrong:
@@ -101,7 +101,9 @@ for r in rows:
 strikes = list(csv.DictReader(open("output/ship_strikes.csv", encoding="utf-8")))
 have = {o["strike_id"] for o in out}
 for s in strikes:
-    if s["vessel_id"] in ("", "NA") or s["strike_id"] in have or s["id_status"] not in ("unreviewed", "NA", ""):
+    # strikes named in the headline itself (strike_id carries "_vessel_"); re-added on every rebuild
+    if "_vessel_" not in s["strike_id"] or re.search(r"_v\d+$", s["strike_id"]) or s["strike_id"] in have \
+            or s["vessel_id"] in ("", "NA"):
         continue
     d, src = NAMED_FIX.get(s["vessel_id"], (s["date_reported"] if s.get("date_reported") not in (None, "", "NA") else s["date"], ""))
     out.append(dict(strike_id=s["strike_id"], row=0, status="ship_strike", vessel_id=s["vessel_id"],

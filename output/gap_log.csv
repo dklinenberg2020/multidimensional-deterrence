@@ -9,6 +9,6 @@ ts,script,what,n,note
 2026-11-03 04:10:43,06_pilot,pilot strikes with severity/dmg/action_id NA (not yet defined),142,by design in Phase 1
 2026-11-03 04:18:58,08_pilot_econ,pilot strikes with dmg_econ NA,129,see econ_flag
 2026-11-03 04:18:58,08_pilot_econ,pilot strikes with neither dmg_econ nor cust_out,123,
-2026-11-04 00:03:32,09_ships,ship reports with attacker undetermined,66,kept; attacker NA
-2026-11-04 00:03:33,09_ships,ship reports dropped as out of scope (Red Sea / Houthi),4,
-2026-11-04 00:03:35,09_ships,merchant ship strikes without dmg_econ_ship,208,see econ_flag
+2026-11-04 00:10:05,09_ships,ship reports with attacker undetermined,66,kept; attacker NA
+2026-11-04 00:10:06,09_ships,ship reports dropped as out of scope (Red Sea / Houthi),4,
+2026-11-04 00:10:07,09_ships,merchant ship strikes without dmg_econ_ship,190,see econ_flag

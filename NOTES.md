@@ -166,6 +166,28 @@ Known problems:
   - Several DWTs rest on a database name match rather than an IMO given in the news (noted per vessel).
   - Tedy's IMO is unconfirmed.
 
+## Ship layer: full review + fleet-share denominator (PI-approved 2026-11-04)
+
+**Full review.** The remaining 140 unnamed merchant strikes were checked against web sources in four batches (`data/raw/ship_identification/2026-11-03/review1-4.csv`), applying the same rules as the identification batches. `py/build_ship_ids.py` merges all six research files.
+- Duplicates across files are resolved explicitly, e.g. the 25–26 Dec 2025 Odesa/Mykolaiv attack appeared in all four review files.
+- Rows marked military move to the warship layer (`id_status = warship`).
+
+**Result: every merchant strike is now reviewed.**
+- 103 unique confirmed merchant-ship strike events, out of 235 machine-extracted. The rest are 67 duplicates, 53 not ship strikes and 12 unclear.
+- 54 of the 103 name a vessel; 45 have `dmg_econ_ship`.
+- By year (RU / UA): 2022 5/1, 2023 4/1, 2024 8/3, 2025 8/2 (+1 unknown attacker), 2026 40/30.
+- About **55% of the raw machine-extracted merchant "strikes" were noise.** The raw ship layer must not be used unreviewed.
+
+**Recall check.** USPA counts 172 civilian vessels damaged, Feb 2022–Apr 2026. We have about 65 RU strike events on merchant ships in the same span; some events hit several ships, and USPA also counts barges and pontoons.
+- VIINA headlines therefore capture well under half of the damaged civilian vessels.
+- A dedicated maritime source is needed for completeness, e.g. BlackSeaNews monitoring or the Odesa "Institute" yearly tallies (39 ships damaged in 2025).
+
+**Fleet-share denominator.** `dmg_econ_ship_share = DWT × severity ÷ (annual seaborne cargo of the target side ÷ 12)`. The target side's ports are Ukrainian seaports for RU strikes, and all Russian seaports for UA strikes, since shadow-fleet tankers are hit outside the Black Sea too.
+- Sources and derivations: `registry/port_throughput.csv`.
+- 2026 carries the 2025 figure forward, flagged.
+
+**Warships were not reviewed.** 332 warship strikes are still raw machine extraction, with earlier sampled precision of about 70%. They are kinetic only, so they matter once `dmg_kin` is built.
+
 ## Proposal sent to the PI (2026-11-03): action mapping and kinetic damage. Not implemented; economic part decided above.
 
 - **Hierarchy:** report → strike (built: same target and attacker within 24 h) → action → episode (lull of 48 h or more).
