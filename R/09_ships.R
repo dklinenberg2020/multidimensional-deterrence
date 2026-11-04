@@ -181,11 +181,11 @@ if (nrow(extra)) {
 # re-attach registry particulars for vessels attached by the ids file, then recompute damage
 strikes <- strikes |> select(-any_of(c("imo", "vessel_type", "flag", "dwt", "military", "dwt_source_url"))) |>
   left_join(vessels |> select(vessel_id, imo, vessel_type, flag, dwt, military, dwt_source_url = source_url), by = "vessel_id") |>
-  mutate(vessel_class = case_when(coalesce(military, "") == "TRUE" ~ "warship",
+  mutate(id_status = coalesce(id_status, "unreviewed"),
+         vessel_class = case_when(coalesce(military, "") == "TRUE" | id_status == "warship" ~ "warship",
                                   coalesce(military, "") == "FALSE" & vessel_class == "warship" ~ "merchant_generic",
                                   TRUE ~ vessel_class),
          target_class = if_else(vessel_class == "warship", "warship", "shipping"),
-         id_status = coalesce(id_status, "unreviewed"),
          dmg_econ_ship = if_else(target_class == "shipping" & id_status %in% c("ship_strike", "unreviewed"), dwt * sev_weight, NA_real_),
          econ_flag = case_when(
            id_status == "not_ship_strike" ~ "reviewed: not a ship strike (excluded)",
@@ -201,8 +201,21 @@ strikes <- strikes |> select(-any_of(c("imo", "vessel_type", "flag", "dwt", "mil
            TRUE ~ "other"))
 arrow::write_parquet(strikes, interim("ship_strikes.parquet"))
 strikes <- strikes |> mutate(location = coalesce(location, sea_area))
+
+# ---- fleet-share denominator (PI-approved 2026-11-04): DWT x severity as a share of ONE MONTH of the
+# target side's seaborne cargo: RU strikes -> Ukrainian seaports; UA strikes -> all Russian seaports
+# (all ports, not only the Black Sea basin, because UA also hits shadow-fleet tankers in the Baltic and
+# Mediterranean). Annual throughput / 12; sources and derivations in registry/port_throughput.csv.
+thr <- readr::read_csv(here("registry", "port_throughput.csv"), show_col_types = FALSE) |>
+  transmute(target_country = country, year, monthly_tonnes = annual_tonnes / 12, denom_method = method)
+strikes <- strikes |>
+  mutate(year = year(date), target_country = case_when(attacker == "RU" ~ "UA", attacker == "UA" ~ "RU")) |>
+  left_join(thr, by = c("target_country", "year")) |>
+  mutate(dmg_econ_ship_share = dmg_econ_ship / monthly_tonnes) |>
+  select(-year)
 readr::write_csv(strikes |> select(strike_id, date, date_reported, time, attacker, target_class, vessel_class, shadow_fleet, location,
-                                   vessel_name, vessel_id, imo, dwt, severity, sev_weight, dmg_econ_ship, econ_flag, id_status,
+                                   vessel_name, vessel_id, imo, dwt, severity, sev_weight, dmg_econ_ship, dmg_econ_ship_share,
+                                   monthly_tonnes, denom_method, econ_flag, id_status,
                                    n_reports, n_sources, headline, url, id_source_url),
                  out("ship_strikes.csv"))
 
@@ -217,7 +230,8 @@ readr::write_csv(names_tbl, out("ship_vessel_names.csv"))
 summ <- strikes |> filter(!id_status %in% c("not_ship_strike", "duplicate", "unclear")) |> mutate(year = year(date)) |>
   group_by(year, attacker, target_class) |>
   summarise(n_strikes = n(), n_named = sum(!is.na(vessel_name)), n_dwt = sum(!is.na(dwt)),
-            sum_dmg_econ_ship = sum(dmg_econ_ship, na.rm = TRUE), .groups = "drop")
+            sum_dmg_econ_ship = sum(dmg_econ_ship, na.rm = TRUE),
+            sum_dmg_econ_ship_share = sum(dmg_econ_ship_share, na.rm = TRUE), .groups = "drop")
 readr::write_csv(summ, out("ship_summary_by_year.csv"))
 log_gap("09_ships", "merchant ship strikes without dmg_econ_ship", sum(strikes$target_class == "shipping" & is.na(strikes$dmg_econ_ship)), "see econ_flag")
 message(sprintf("%d ship reports -> %d ship strikes (%d warship, %d merchant); %d merchant strikes name a vessel; %d distinct merchant names",

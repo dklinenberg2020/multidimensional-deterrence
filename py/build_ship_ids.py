@@ -16,8 +16,12 @@ from pathlib import Path
 
 RAW = Path("data/raw/ship_identification/2026-11-03")
 MILITARY = re.compile(r"navy|naval|landing ship|submarine|cable ship", re.I)
-# researcher-stated duplicates among UNNAMED rows: row -> primary row
+# researcher-stated duplicates among UNNAMED rows: row -> primary row (batch files)
 UNNAMED_DUPS = {18: 7, 19: 7, 38: 37, 41: 40, 53: 51, 76: 75}
+# duplicates ACROSS review files (each review file only saw its own rows):
+#  26 Dec 2025 Odesa/Mykolaiv drone attack (Slovak/Palau/Liberian ships) -> primary row 172
+#  Valery Gorchakov, Rostov-on-Don 18 Dec 2025 -> primary row 183
+CROSS_DUPS = {173: 172, 179: 172, 184: 183}
 # sea-area corrections stated by researchers
 LOCATION = {57: "Black Sea", 72: "Sea of Azov", 80: "Sea of Azov"}
 # headline-named strikes (already in output/ship_strike.csv) whose VIINA date is wrong:
@@ -45,6 +49,20 @@ for v in vessels:
 rows = []
 for f in sorted(RAW.glob("batch*.csv")):
     rows += list(csv.DictReader(open(f, encoding="utf-8")))
+# review files (rows 101+): duplicate_of_row / known_vessel columns; a cell may name several ships
+for f in sorted(RAW.glob("review*.csv")):
+    for r in csv.DictReader(open(f, encoding="utf-8")):
+        names = r.get("known_vessel") or r.get("vessel_name") or ""
+        parts = [p.strip() for p in re.split(r"\s*(?:,|;|\band\b|\bта\b)\s*", names) if p.strip()] or [""]
+        dup = (r.get("duplicate_of_row") or "").strip()
+        for k, nm in enumerate(parts):
+            rr = dict(r)
+            rr["vessel_name"] = nm
+            if k > 0 or r.get("known_vessel"):     # particulars belong to the single new vessel only
+                rr["imo"] = rr["dwt"] = "" if (k > 0 or r.get("known_vessel")) else rr["imo"]
+            rr["dup_row"] = int(float(dup)) if dup else None
+            rr["port_or_area"] = ""
+            rows.append(rr)
 
 new_vessels = {}
 for r in rows:
@@ -69,7 +87,10 @@ for r in rows:
 status_map = {"yes": "ship_strike", "no": "not_ship_strike", "unclear": "unclear"}
 out = []
 for r in rows:
-    out.append(dict(strike_id=r["strike_id"], row=r["row"], status=status_map.get(r["is_ship_strike"], "unclear"),
+    st = status_map.get(r["is_ship_strike"], "unclear")
+    if st == "not_ship_strike" and re.search(r"\bmilitary\b", r.get("notes", ""), re.I):
+        st = "warship"          # a real strike, but on a military vessel -> moves to the warship (kinetic) layer
+    out.append(dict(strike_id=r["strike_id"], row=r["row"], status=st,
                     vessel_id=r["vessel_id"], vessel_name=r["vessel_name"].strip(),
                     actual_strike_date=r["actual_strike_date"][:10] if re.match(r"\d{4}-\d{2}-\d{2}", r["actual_strike_date"]) else "",
                     attacker=r["attacker"] if r["attacker"] in ("RU", "UA") else ("unknown" if r["is_ship_strike"] != "no" else ""),
@@ -104,9 +125,19 @@ for o in named:
 by_row = {}
 for o in out:
     by_row.setdefault(o["row"], o)
-for r, p in UNNAMED_DUPS.items():
-    for o in out:
-        if o["row"] == r:
+dup_rows = dict(UNNAMED_DUPS); dup_rows.update(CROSS_DUPS)
+for r in rows:
+    if r.get("dup_row"):
+        dup_rows.setdefault(int(r["row"]), r["dup_row"])
+def root(rw):
+    seen = set()
+    while rw in dup_rows and rw not in seen:
+        seen.add(rw); rw = dup_rows[rw]
+    return rw
+for o in out:
+    if o["row"] in dup_rows:
+        p = root(o["row"])
+        if p in by_row and by_row[p]["strike_id"] != o["strike_id"]:
             o["status"], o["duplicate_of"] = "duplicate", by_row[p]["strike_id"]
 
 # a strike_id carrying several vessels: if its FIRST vessel is a duplicate, the whole strike is

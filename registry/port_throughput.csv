@@ -1,0 +1,11 @@
+country,year,annual_tonnes,method,source_url,note
+UA,2022,51000000,reported,https://en.cfts.org.ua/news/ukrainian_ports_handle_62_million_tons_of_cargo_in_2023,"USPA via CFTS: about 51 mn t in 2022"
+UA,2023,62000000,reported,https://en.cfts.org.ua/news/ukrainian_ports_handle_62_million_tons_of_cargo_in_2023,"USPA via CFTS: about 62 mn t in 2023"
+UA,2024,97200000,reported,https://ukranews.com/en/amp/news/1059864-ukrainian-seaports-up-cargo-processing-by-56-8-to-97-2-million-tons-in-2024,"USPA: 97.2 mn t in 2024"
+UA,2025,82200000,reported,https://gmk.center/en/news/ukrainian-seaports-handled-82-2-million-tons-of-cargo-in-2025/,"USPA: 82.2 mn t in 2025"
+UA,2026,82200000,carried_forward,https://gmk.center/en/news/ukrainian-seaports-handled-82-2-million-tons-of-cargo-in-2025/,"no full-year 2026 figure yet: 2025 value carried forward"
+RU,2022,841800000,derived,https://en.portnews.ru/news/358777,"2023 total 884.7 mn t was +5.1% y/y, so 2022 = 884.7/1.051"
+RU,2023,884700000,reported,https://en.portnews.ru/news/358777,"all Russian seaports, 884.7 mn t"
+RU,2024,890200000,derived,https://tass.com/economy/2057925,"11M 2025 = 808.7 mn t, -0.9% y/y, so 11M 2024 = 816.0; annualised x12/11"
+RU,2025,882200000,derived,https://tass.com/economy/2057925,"11M 2025 = 808.7 mn t annualised x12/11"
+RU,2026,882200000,carried_forward,https://tass.com/economy/2057925,"no 2026 figure yet: 2025 value carried forward"
