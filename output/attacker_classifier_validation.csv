@@ -1,0 +1,9 @@
+metric,value,n
+classifier_accuracy_2026_holdout,0.7923218899963086,13545.0
+rule_accuracy_2026_holdout,0.8146917681801402,13545.0
+classifier_recall_RU,0.8526742444268217,11349.0
+classifier_precision_RU,0.8945276391199852,11349.0
+rule_recall_RU,0.8824566041060886,11349.0
+classifier_recall_UA,0.48041894353369763,2196.0
+classifier_precision_UA,0.3868720205353869,2196.0
+rule_recall_UA,0.4644808743169399,2196.0

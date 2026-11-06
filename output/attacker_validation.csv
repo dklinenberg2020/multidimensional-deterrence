@@ -1,0 +1,8 @@
+subset,n,coverage,accuracy
+all labelled strike-like,24820,0.9889605157131346,0.7778049376680518
+basis = contested,229,0,NA
+basis = control,23753,1,0.7817117837746811
+basis = no_control_data,45,0,NA
+basis = text,793,1,0.6607818411097099
+VIINA label = RU,20535,0.9901144387630874,0.859089120598072
+VIINA label = UA,4285,0.9834305717619604,0.3856193640246796

@@ -118,6 +118,28 @@ Each decision is provisional unless it is marked as fixed by the brief.
   - Zmiiv TPP is dated 30 Mar (the day it was reported).
   - The Donetsk 41k outage is attributed to RU, but it was a UA strike on occupied Donetsk.
 
+## PI decisions 2026-11-06 (approved items 1-4)
+
+1. **Action rule.** An action ends when the other side strikes, or after a gap of 12 h or more with no strike from the same side. Overlapping RU/UA actions are allowed: actions are ordered by start time, and `gap_prev` can be negative.
+2. **Kinetic damage.** Kept in two columns: `deaths_reported` (the maximum headline death count over the strike's reports) and `dmg_kin_model` (modelled expected deaths for strikes with no count, flagged). `dmg_kin` = reported if present, else modelled.
+3. **Attacker for 2022–24.**
+   - Primary rule: who controls the target location. VIINA `control` files give the status of the populated place (geonameid) on the strike date. Ukrainian-controlled → attacker RU; Russian-controlled or inside Russia → attacker UA.
+   - Second step: a classifier trained on VIINA's 2025+ initiator labels.
+   - The control rule is validated against the 2025+ labels.
+4. **UA→RU sources.** IntelliNews is the base, plus Deep Strike. Access to Baker is approved; the PI is requesting it themself from bakerinstitute.org/research/quantifying-ukraines-strikes-russian-energy-infrastructure. ACLED also needs an account in the PI's name.
+
+## Attacker attribution: results (2026-11-06)
+
+- **`R/10_attacker.R`** applies the text cue + territorial-control rule to all reports. Output: `data/interim/viina_attacker.parquet`; validation: `output/attacker_validation.csv`. The VIINA control files are pinned to the same commit.
+- **Agreement with VIINA's 2025+ initiator labels** (strike-like reports, 24,820):
+  - 78% overall; 86% when VIINA says RU, 39% when VIINA says UA.
+  - Coverage is 99%. Contested or no-control-data places get NA (about 2–3%).
+- **Rule failure mode:** Ukrainian front-line operations are reported from Ukrainian-held towns, so the rule reads them as RU.
+- **`py/attacker_classifier.py`** (TF-IDF character n-grams + control features, logistic regression, trained on 2025, tested on 2026): accuracy 79% vs the rule's 81%; UA recall 48% vs 46%. **No gain.**
+  - The ceiling partly reflects VIINA's labels themselves, which are BERT output (UA F1 0.76).
+  - **Decision:** the rule is the attacker; the classifier's `p_ua` is kept only as a disagreement diagnostic.
+- **Scope finding for actions:** with all strike-like reports, Russian reports in March 2024 never pause for 12 h (longest gap 7.5 h), so the whole month would be one action. With long-range strikes only (missile/drone/air wording, no artillery), there are 143 reports and ten gaps of 12 h or more. A scope decision is needed (see Open questions).
+
 ## Ships: PI decision (2026-11-03), implemented whole-period in `R/09_ships.R`
 
 PI decisions:
@@ -196,6 +218,8 @@ Known problems:
 - **`dmg_econ`:** capacity as a share of national capacity × a severity weight. IntelliNews's 0–4 damage scale maps to 0 / 0.1 / 0.3 / 0.6 / 1; RU→UA severity would be coded from the reports. Robustness check: capacity × days offline. Unnamed grid strikes stay NA, or are measured by customers cut off, or by an oblast proxy (PI to decide).
 
 ## Open questions / decisions for the PI
+
+-1. **Kinetic scope for actions (blocking):** include all strike-like reports (front-line artillery too), or long-range strikes only? See "Attacker attribution: results".
 
 0. **Ships:** (a) denominator for "share of the relevant fleet"; (b) recover names for unnamed merchant ships from AMPU reports?
 
