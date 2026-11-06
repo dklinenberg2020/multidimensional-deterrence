@@ -1,0 +1,7 @@
+attacker,action_type,n_actions,n_strikes,dmg_kin,dmg_kin_reported,dmg_econ,cust_out
+RU,both,25,289,230.9,79,0.07210338680926916,612344
+RU,economic,1,1,0,0,0,0
+RU,kinetic,6,28,35.7,14,0,0
+UA,both,8,22,6.2,0,0.0027522935779816515,41000
+UA,economic,12,15,0,0,0.023547400611620795,0
+UA,kinetic,4,4,0,0,0,0

@@ -140,6 +140,32 @@ Each decision is provisional unless it is marked as fixed by the brief.
   - **Decision:** the rule is the attacker; the classifier's `p_ua` is kept only as a disagreement diagnostic.
 - **Scope finding for actions:** with all strike-like reports, Russian reports in March 2024 never pause for 12 h (longest gap 7.5 h), so the whole month would be one action. With long-range strikes only (missile/drone/air wording, no artillery), there are 143 reports and ten gaps of 12 h or more. A scope decision is needed (see Open questions).
 
+## March 2024 pilot actions (2026-11-06): `R/11_pilot_actions.R`
+
+**PI scope decision:** long-range strikes only. That means missile, ballistic, Shahed/drone attack, air-strike or glide-bomb wording, excluding artillery, front-line digests ("на … напрямку", "обстріляли …", Сіверщина/Слобожанщина lists), FPV drones, air-defence tallies and commentary. Every economic-target strike and reviewed ship strike is also included, whatever the weapon.
+
+**Strikes.** 359 in total: 142 economic, 207 kinetic, 10 ship.
+- Kinetic strike = attacker × populated place, merged within 24 h.
+- Ukrainian kinetic strikes require the text cue (strikes into Russia, Crimea or the occupied rear), because the control rule mislabels front-line events.
+- Reports already used by the economic or ship layers are excluded, so nothing is counted twice.
+
+**Timestamps (important finding).** liveuamap, Ukrainska Pravda, LIGA and Meduza publish dates only and stamp every report 00:00. That is 60% of March 2024 reports, and 35–74% per year.
+- These reports get `time_precision = day` and never set an action's clock time.
+- Actions are built from minute-precision strikes. A day-precision strike joins the same-attacker action covering its date; otherwise it forms its own action with `start_precision = day`, starting 12:00.
+
+**Actions.** A new action starts when the gap from the side's previous strike is at least 12 h. It also starts when an opponent strike falls in between and that gap is at least `WAVE_H` = 3 h; this 3 h value is my implementation choice for "a wave is not split", and is open to change. Episodes break at a lull of 48 h or more.
+- Result: **56 actions (32 RU, 24 UA), 1 episode.** There is no 48 h lull in March 2024, so episodes will rarely break in this war.
+- Example: the 22 Mar grid attack is one RU action of 36 strikes.
+
+**`dmg_kin`.**
+- `deaths_reported` is the maximum count over the strike's headlines. The parser strips ages ("76-річний"), injury counts and found remains.
+- If there is no count: strikes mentioning casualties get the mean reported deaths of strikes with a count (side-specific if at least 10 basis strikes, else pooled; RU 2.7). Strikes with no casualty mention get 0.
+- Every value is flagged in `dmg_kin_basis`. **This is provisional:** many deaths are reported in later follow-ups that the 24 h strike window does not capture, so reported deaths are undercounted (e.g. the 22 Mar action shows 0 reported deaths).
+
+**Precision of the kinetic layer** (40 sampled; I labelled them myself, NOT human-verified; labelled before the last filter was added): 70% strict; attacker correct on 26 of 28 true strikes; 1 deaths-extraction error. Labels: `data/raw/manual_labels/2026-11-03/kinetic_precision_labels.csv`.
+
+**Outputs:** `data/final/pilot_2024_03_strikes.csv`, `data/final/pilot_2024_03_actions.csv` and `output/pilot_actions_summary.csv`. These are a pilot: not for analysis until the kinetic precision and death counts are improved.
+
 ## Ships: PI decision (2026-11-03), implemented whole-period in `R/09_ships.R`
 
 PI decisions:

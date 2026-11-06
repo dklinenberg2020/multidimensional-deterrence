@@ -12,3 +12,4 @@ ts,script,what,n,note
 2026-11-04 00:10:05,09_ships,ship reports with attacker undetermined,66,kept; attacker NA
 2026-11-04 00:10:06,09_ships,ship reports dropped as out of scope (Red Sea / Houthi),4,
 2026-11-04 00:10:07,09_ships,merchant ship strikes without dmg_econ_ship,190,see econ_flag
+2026-11-06 04:12:23,11_pilot_actions,pilot strikes with modelled dmg_kin,327,see dmg_kin_basis
