@@ -1,0 +1,29 @@
+{
+  "source_rows": 59,
+  "covered_dates": 37,
+  "daypart_counts": {
+    "AM": 18,
+    "unspecified": 23,
+    "PM": 18
+  },
+  "actor_counts": {
+    "Ansar Allah group (Houthis)": 40,
+    "Joint Forces": 16,
+    "Internationally recognized government of Yemen": 1,
+    "Saudi/UAE-led Coalition": 2
+  },
+  "incident_type_counts": {
+    "Mines": 4,
+    "Arbitrary detention": 9,
+    "Recruitment and use of children": 5,
+    "Enforced disappearance": 13,
+    "Explosive Objects": 2,
+    "Gun shot": 14,
+    "Ground attacks": 9,
+    "Air strikes": 2,
+    "Torture": 1
+  },
+  "missing_district": 7,
+  "source_rows_with_victim_table": 59,
+  "district_dates_with_different_attributed_actors_in_am_and_pm": 0
+}

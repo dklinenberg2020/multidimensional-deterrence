@@ -32,3 +32,5 @@ python scripts/index_cinep_cases.py ../deterrence-subdaily-sources/colombia ../d
 The Yemen source files are named `S-2019-{51,99,206,299}-en.pdf`. The CINEP files follow `cinep-<issue>-<MM>02.pdf` and the June snapshot is named `cinep-24-media.pdf`. Find the CINEP months at `https://www.nocheyniebla.org/wp-content/uploads/u1/<issue>/pdf/noche<MM>02.pdf`. The downloaded PDFs, Yemen narrative extract and Colombia review queue are retained in the cloud workspace. The reviewed extracts and audit counts are committed.
 
 The [archive acquisition log](archive-acquisition.md) records the follow-up search, downloaded documentary evidence and draft access requests.
+
+The [follow-up source review](alternate-records.md) adds Mwatana pilot coverage, humanitarian access records and tripartite public case descriptions.
