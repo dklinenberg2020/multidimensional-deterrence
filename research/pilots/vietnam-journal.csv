@@ -1,0 +1,33 @@
+date,pdf_page,journal_item,time_in,time_out,occurrence_start,occurrence_end,clock_note,record_type,observation
+1968-01-02,8,22,10:35,,,,continuation,report,Continuation of a report about recovered material
+1968-01-02,8,23,10:41,,09:54,10:41,explicit operation interval,movement,Report lists four pickup and landing times for a lift
+1968-01-02,8,24,10:47,,,,,status,South Vietnamese unit reports its location unchanged
+1968-01-02,8,25,10:52,,,,,observation,Gunships reported spotting a person identified as enemy
+1968-01-02,8,26,10:55,,10:44,10:55,explicit pickup and landing times,movement,Company B reports final extraction
+1968-01-02,8,27,10:55,,,,,movement,Unit reports departing its overnight location
+1968-01-02,8,28,11:01,,,,,administrative,Division adviser reports a designation for the area
+1968-01-02,8,29,11:01,,,,,combat_report,Company B reports gunships engaged persons identified as Viet Cong
+1968-01-02,8,30,11:01,,,,attribution differs from item 29,observation,Informant identifies the observed personnel as North Vietnamese Army
+1968-01-02,8,31,11:13,,,,,status,Company C reports positions
+1968-01-02,8,32,11:14,,,,,status,Company D reports a position
+1968-01-02,8,33,11:19,,,,,combat_report,Company B reports contact with opposing forces
+1968-01-06,47,67,18:20,,,,ongoing at receipt as stated,observation,South Vietnamese unit reports an opposing element moving
+1968-01-06,47,68,18:25,,,,,observation,South Vietnamese unit reports an assessment of opposing presence
+1968-01-06,47,69,18:33,,,,,request,Battalion commander requests illumination aircraft
+1968-01-06,47,70,18:33,,,,,observation,South Vietnamese unit reports observing Viet Cong positions
+1968-01-06,47,71,18:40,,,,,observation,South Vietnamese unit reports sighting opposing elements
+1968-01-06,47,72,18:53,,,,,combat_report,Company A reports receiving sniper fire
+1968-01-06,47,73,19:00,,,,,status,Journal reports the illumination aircraft on station
+1968-01-06,47,74,19:15,,,,request ongoing at receipt as stated,request,South Vietnamese unit reports calling for artillery
+1968-01-09,70,61,18:13,,,,,status,Aircraft crew reports weather prevented removal
+1968-01-09,70,62,18:20,,,,,status,Company A reports a cavalry element has difficulty moving
+1968-01-09,70,63,19:00,,,,,combat_report,Company A reports receiving fire and possible fire on a resupply aircraft
+1968-01-09,70,64,18:45,,,,marked late entry,combat_report,Company A reports sniper fire on a cavalry element
+1968-01-09,70,65,19:45,,,,,status,Cavalry element reports position
+1968-01-09,70,66,,20:00,,,,routine_sitrep,No change reported
+1968-01-09,70,67,20:01,,,,,status,South Vietnamese unit reports positions
+1968-01-09,70,68,20:41,,,,,combat_report,Cavalry element reports receiving sniper fire
+1968-01-09,70,69,,21:00,,,,routine_sitrep,No change reported
+1968-01-09,70,70,,22:00,,,,routine_sitrep,No change reported
+1968-01-09,70,71,,23:00,,,,routine_sitrep,No change reported
+1968-01-09,70,72,,24:00,,,source end-of-day notation,routine_sitrep,No change reported

@@ -1,0 +1,15 @@
+{
+  "colombia_observations": 15,
+  "colombia_with_subdaily_clock": 10,
+  "colombia_cnmh_episode_candidates": {
+    "Bojaya": 6,
+    "Mitu": 4
+  },
+  "vietnam_journal_entries": 32,
+  "vietnam_combat_reports": 6,
+  "vietnam_explicit_occurrence_times": 2,
+  "vietnam_combat_reports_with_explicit_occurrence_times": 0,
+  "vietnam_combat_reports_with_same_minute_release_clock": 2,
+  "vietnam_same_minute_candidate_incidents": 7,
+  "verified_event_level_links": 0
+}

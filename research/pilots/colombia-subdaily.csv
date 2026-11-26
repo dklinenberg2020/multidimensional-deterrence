@@ -1,0 +1,16 @@
+observation_id,episode,date,clock_start,clock_end,clock_precision,place,actor_reported,observation,source_key,source_locator
+co-b01,Bojaya,2002-04-21,11:00,,approximate,Vigia del Fuerte and Bojaya,AUC,Reported arrival by river,defensoria12,account of April 21
+co-b02,Bojaya,2002-05-01,18:00,,approximate,Bellavista,FARC and paramilitaries,Fighting ceased after an agreement,victims-unit,chronology May 1
+co-b03,Bojaya,2002-05-02,06:00,,reported,Bellavista,FARC and paramilitaries,Fighting resumed,victims-unit,chronology May 2
+co-b04,Bojaya,2002-05-02,10:30,,reported,Bellavista,FARC,First projectile exploded near the church,victims-unit,chronology May 2
+co-b05,Bojaya,2002-05-02,11:00,,reported,Bellavista,FARC,Projectile exploded inside the church,victims-unit,chronology May 2
+co-b06,Bojaya,2002-05-02,,,relative_only,Bellavista,,Another projectile fell without exploding while civilians were leaving,victims-unit,chronology May 2
+co-b07,Bojaya,2002-05-03,,,day,Bellavista,FARC,Returned and fighting resumed,victims-unit,chronology May 3
+co-b08,Bojaya,2002-05-04,,,day,Bojaya,Diocese of Quibdo,Humanitarian delegations arrived,victims-unit,chronology May 4
+co-b09,Bojaya,2002-05-06,,,day,Bojaya region,State security forces,Entered the region,victims-unit,chronology May 6
+co-m01,Mitu,1998-11-01,,,part_of_day,Mitu,FARC,Attack began around dawn,cev-mitu,printed p. 29
+co-m02,Mitu,1998-11-01,16:00,,approximate,toward Mitu,Colombian armed forces,Witness recalled start of movement toward Mitu,cev-mitu,printed p. 40
+co-m03,Mitu,1998-11-01,18:10,18:20,reported_interval,Mitu,Colombian armed forces,Witness recalled overflight and observing fires,cev-mitu,printed p. 40
+co-m04,Mitu,1998-11-02,06:00,,recalled,Querari,Colombian air force,Witness recalled arrival of transport aircraft,cev-mitu,printed p. 40
+co-m05,Mitu,1998-11-02,10:45,,recalled,near Mitu,Colombian armed forces,Witness recalled start of ground movement,cev-mitu,printed p. 40
+co-m06,Mitu,1998-11-02,11:00,,recalled,near Mitu,Colombian armed forces and FARC,Witness recalled start of fighting during the retaking,cev-mitu,printed p. 40

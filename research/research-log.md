@@ -1,5 +1,9 @@
 # Research log
 
+## Pilot transcriptions and additional archive checks
+
+Completed two [subdaily transcription pilots](pilots/README.md). The Colombia pilot retained 10 clock-bearing observations and identified 10 potential CNMH episode records. The Vietnam pilot separated combat reports' receipt clocks from independently stated occurrence times. No event-level link was verified. The [archive follow-up](subdaily-source-search.md#follow-up-on-the-other-conflicts) identifies exact UNFICYP and UNPROFOR file references.
+
 ## Subdaily archival search
 
 Verified clock-bearing sources for Bojayá and Mitú, Vietnam duty logs, and UN observer reports from Cyprus. Located the relevant INCDA and ICCS archival series and identified Bosnia and Falklands records for further checks. The [source assessment](subdaily-source-search.md) records sample evidence, archive references, and acquisition status.
