@@ -1,0 +1,36 @@
+{
+  "sources": {
+    "S/2019/51": {
+      "sha256": "2d548f0406a6acb1c968e13f0d9e55597a8447a82e9f20f1c48917a92b4efdba",
+      "numbered_rows": 494
+    },
+    "S/2019/99": {
+      "sha256": "69904faecf5b3d42b07df4333c36957d73ae4a350df154039056806f13e1915b",
+      "numbered_rows": 943
+    },
+    "S/2019/206": {
+      "sha256": "32a0187fec077a9973d2761f3d2bd5ae2b3fa9d859c567c5f3086203477b31a2",
+      "numbered_rows": 811
+    },
+    "S/2019/299": {
+      "sha256": "5460a19ec6a1e80e90d089680b56a0951681ec50b6396a6c7eeb471e21810429",
+      "numbered_rows": 992
+    }
+  },
+  "repeated_claim_numbers_across_51_and_99": 494,
+  "repeated_claim_field_disagreements": {
+    "reported_date_utc": 0,
+    "reported_clock_utc_raw": 7,
+    "reported_location": 7,
+    "reported_category": 5
+  },
+  "distinct_numbered_claims": 2746,
+  "claims_with_clock": 2744,
+  "claims_missing_clock": 1,
+  "claims_invalid_clock": 1,
+  "claims_missing_location": 5,
+  "claims_changing_date_in_local_time": 363,
+  "first_yemen_local_clock": "2018-12-18T00:08+03:00",
+  "last_yemen_local_clock": "2019-03-31T01:53+03:00",
+  "calendar_days_with_timed_claims": 104
+}

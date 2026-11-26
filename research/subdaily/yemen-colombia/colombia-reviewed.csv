@@ -1,0 +1,9 @@
+observation_id,date,clock_local_reported,clock_role,municipality,department,reported_actor,event,source_file,pdf_page,notes
+cinep-001,2002-04-04,11:00,reported_occurrence,Tumaco,Nariño,FARC-EP,Destruction of electrical tower,cinep-24-0402.pdf,7,Reported as occurrence
+cinep-002,2002-06-01,00:15,approximate_occurrence,Corinto,Cauca,Paramilitaries,Start of a series of shootings,cinep-24-media.pdf,1,The casualty total in the entry covers the sequence
+cinep-003,2002-06-01,17:30,approximate_occurrence,Tibú,Norte de Santander,Army and ELN named in report,Fatality during combat following detention,cinep-24-media.pdf,2,The individual agent who fired is unresolved
+cinep-004,2002-06-01,15:00,reported_occurrence,Florida,Valle del Cauca,Paramilitaries according to complaint,Movement to Cañas Arriba followed by detention of civilians,cinep-24-media.pdf,2,The clock refers to movement and does not separately time each detention
+cinep-005,2002-06-01,19:00,reported_end,Florida,Valle del Cauca,Paramilitaries according to complaint,End of one reported detention interval,cinep-24-media.pdf,2,One witness account groups several actions under one case heading
+cinep-006,2002-06-02,07:00,approximate_occurrence,Florida,Valle del Cauca,Paramilitaries according to complaint,Release following detention and threats,cinep-24-media.pdf,2,June 2 event appears in a case filed under June 1
+cinep-007,2002-06-02,11:00,reported_occurrence,Florida,Valle del Cauca,Paramilitaries according to complaint,Armed men returned to a house and left an explosive device,cinep-24-media.pdf,2,The return was timed and installation had no separate clock
+cinep-008,2002-06-02,03:30,approximate_occurrence,Cúcuta,Norte de Santander,Unknown,Reported fatal shooting of a newspaper distributor,cinep-24-media.pdf,2,Time is approximate

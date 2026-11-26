@@ -1,0 +1,4 @@
+observation_id,date,reported_clock,clock_role,place,reported_actor,fatalities_reported,injuries_reported,source_note
+mwatana-g01,2018-02-10,10:00,approximate_occurrence,Taizz,Unknown; witnesses describe direction from Houthi-controlled area,2,11,Direction is source evidence rather than direct identification
+mwatana-g02,2018-05-16,11:00,approximate_occurrence,Al Jawf,Popular Resistance,,2,Published weekday conflicts with calendar date; retain both in source review
+mwatana-g03,2018-07-15,17:30,approximate_occurrence,Al Jawf,Ansar Allah,5,6,Reported occurrence

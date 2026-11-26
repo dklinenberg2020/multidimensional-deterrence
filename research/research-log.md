@@ -1,5 +1,9 @@
 # Research log
 
+## Yemen and Colombia source expansion
+
+Extracted 2,746 ordered coalition claims from UN-circulated Yemen filings, with 2,744 usable minute clocks. Retrieved and indexed 506 pages of CINEP's Colombian case sections for 2002. The [coverage comparison](subdaily/yemen-colombia/README.md) records the remaining differences from the Gaza SITREP and links to the data and source audits.
+
 ## Multilingual archival follow-up
 
 Reviewed Spanish, Vietnamese, Turkish, Greek and Polish sources. Added 12 source observations and a 33-date index to the Turkish Red Crescent compilation. The archive review identifies a 15-minute discrepancy in Bojayá and the Colombia monitoring mechanism verification annex as an acquisition target. See [source locations and checksums](subdaily/multilingual-sources.md).

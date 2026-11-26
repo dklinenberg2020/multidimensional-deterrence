@@ -1,0 +1,86 @@
+{
+  "01": {
+    "pdf_pages": 45,
+    "sha256": "360a669771859cf7044ee93ef73de5e36a2069c9425b2a998f5bd24ea1ae4eb0",
+    "detected_dated_case_headings": 373,
+    "case_fragments_with_clock_like_text": 75,
+    "clock_like_expressions": 87
+  },
+  "02": {
+    "pdf_pages": 38,
+    "sha256": "533e87c5804d2df9bed01247d3e4e7baedff8447f1e79622242795015eb20474",
+    "detected_dated_case_headings": 329,
+    "case_fragments_with_clock_like_text": 67,
+    "clock_like_expressions": 74
+  },
+  "03": {
+    "pdf_pages": 45,
+    "sha256": "9bb811266db6d089080e59f492017a8deeb84a2331ac985696d250d5f6d9bec0",
+    "detected_dated_case_headings": 366,
+    "case_fragments_with_clock_like_text": 70,
+    "clock_like_expressions": 74
+  },
+  "04": {
+    "pdf_pages": 42,
+    "sha256": "c069753337495a42340bdc4f60e2e279be26f4eb45c93f1070897f39b645d885",
+    "detected_dated_case_headings": 356,
+    "case_fragments_with_clock_like_text": 58,
+    "clock_like_expressions": 64
+  },
+  "05": {
+    "pdf_pages": 49,
+    "sha256": "fafca7a15bf3af8456320b11a49b3fd1d6085c3ca16fd0ac1a917305ee2a6843",
+    "detected_dated_case_headings": 349,
+    "case_fragments_with_clock_like_text": 55,
+    "clock_like_expressions": 63
+  },
+  "06": {
+    "pdf_pages": 44,
+    "sha256": "9e56187b1f5b5f569c8028584772c088d76e856f7268de46953edd41560f4df0",
+    "detected_dated_case_headings": 326,
+    "case_fragments_with_clock_like_text": 65,
+    "clock_like_expressions": 69
+  },
+  "07": {
+    "pdf_pages": 39,
+    "sha256": "28fbf3d320b52748de83aca9318d7fb640c32d596f41239c3552453a38e7cfab",
+    "detected_dated_case_headings": 313,
+    "case_fragments_with_clock_like_text": 59,
+    "clock_like_expressions": 61
+  },
+  "08": {
+    "pdf_pages": 44,
+    "sha256": "229f4766648cdf8a550753deb80e6111dfa35b1f64726382f7d0065e985561f4",
+    "detected_dated_case_headings": 371,
+    "case_fragments_with_clock_like_text": 67,
+    "clock_like_expressions": 74
+  },
+  "09": {
+    "pdf_pages": 44,
+    "sha256": "897d057effd92c3c320692a56acf328d4db5fd0ba8c58b37721a79b9daa9d494",
+    "detected_dated_case_headings": 337,
+    "case_fragments_with_clock_like_text": 57,
+    "clock_like_expressions": 58
+  },
+  "10": {
+    "pdf_pages": 46,
+    "sha256": "253b3a258b57c68f4f591e63ed822dbdabc719f0ee15e97bd23fe70e6e3d1fc5",
+    "detected_dated_case_headings": 356,
+    "case_fragments_with_clock_like_text": 50,
+    "clock_like_expressions": 52
+  },
+  "11": {
+    "pdf_pages": 42,
+    "sha256": "9a75a937eb6fd865621dbaf2bba8e2337c69f4c63aacf997001a585a9ba97a67",
+    "detected_dated_case_headings": 345,
+    "case_fragments_with_clock_like_text": 83,
+    "clock_like_expressions": 87
+  },
+  "12": {
+    "pdf_pages": 28,
+    "sha256": "0d160eba562dae921fe1827e86df323550490dd47564930558dce9c9a7d25dcd",
+    "detected_dated_case_headings": 224,
+    "case_fragments_with_clock_like_text": 47,
+    "clock_like_expressions": 49
+  }
+}
