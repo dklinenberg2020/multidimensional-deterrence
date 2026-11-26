@@ -1,0 +1,371 @@
+{
+  "release_rows": 638760,
+  "post_ceasefire_rows": 1281,
+  "post_ceasefire_valid_clocks": 1241,
+  "after_documented_sitra_end_rows": 6,
+  "post_ceasefire_close_pairs": 0,
+  "valid_clocks": 555653,
+  "source_breakdown": {
+    "SITRA": {
+      "rows": 334184,
+      "first_date": "1964-10-09",
+      "last_date": "1975-09-22",
+      "valid_clocks": 274063,
+      "rows_by_initiator": {
+        "Friendly": 199580,
+        "Enemy": 133787,
+        "unspecified": 817
+      },
+      "timed_by_initiator": {
+        "Friendly": 141100,
+        "Enemy": 132152,
+        "unspecified": 811
+      },
+      "exact_hour": 104876,
+      "exact_half_hour_excluding_hour": 51313,
+      "off_five_minute_grid": 18805,
+      "nonzero_seconds_past_minute": 0,
+      "most_frequent_clock": "23:00",
+      "most_frequent_clock_rows": 37574,
+      "clock_1601_rows": 5802,
+      "boundary_clock": 59728,
+      "both_sides_four_casualty_fields": 0,
+      "target_specific_populated": 78707,
+      "data_type_counts": {
+        "large_unit_operation": 149012,
+        "enemy_initiated_incident": 134318,
+        "friendly_small_unit": 50854
+      }
+    },
+    "TIRSA": {
+      "rows": 50349,
+      "first_date": "1967-09-06",
+      "last_date": "1973-02-11",
+      "valid_clocks": 45246,
+      "rows_by_initiator": {
+        "Enemy": 50349
+      },
+      "timed_by_initiator": {
+        "Enemy": 45246
+      },
+      "exact_hour": 23352,
+      "exact_half_hour_excluding_hour": 8929,
+      "off_five_minute_grid": 897,
+      "nonzero_seconds_past_minute": 0,
+      "most_frequent_clock": "23:00",
+      "most_frequent_clock_rows": 2731,
+      "clock_1601_rows": 0,
+      "boundary_clock": 2142,
+      "both_sides_four_casualty_fields": 0,
+      "target_specific_populated": 0,
+      "data_type_counts": {
+        "enemy_initiated_incident": 50349
+      }
+    },
+    "VCIIA": {
+      "rows": 154253,
+      "first_date": "1965-01-01",
+      "last_date": "1968-12-31",
+      "valid_clocks": 142948,
+      "rows_by_initiator": {
+        "Enemy": 154253
+      },
+      "timed_by_initiator": {
+        "Enemy": 142948
+      },
+      "exact_hour": 38682,
+      "exact_half_hour_excluding_hour": 24972,
+      "off_five_minute_grid": 9544,
+      "nonzero_seconds_past_minute": 0,
+      "most_frequent_clock": "21:00",
+      "most_frequent_clock_rows": 2929,
+      "clock_1601_rows": 10,
+      "boundary_clock": 11241,
+      "both_sides_four_casualty_fields": 154253,
+      "target_specific_populated": 28139,
+      "data_type_counts": {
+        "enemy_initiated_incident": 154253
+      }
+    },
+    "VNDBA": {
+      "rows": 99974,
+      "first_date": "1963-01-01",
+      "last_date": "1969-12-31",
+      "valid_clocks": 93396,
+      "rows_by_initiator": {
+        "Friendly": 50123,
+        "Enemy": 49851
+      },
+      "timed_by_initiator": {
+        "Friendly": 47499,
+        "Enemy": 45897
+      },
+      "exact_hour": 32530,
+      "exact_half_hour_excluding_hour": 16565,
+      "off_five_minute_grid": 8067,
+      "nonzero_seconds_past_minute": 0,
+      "most_frequent_clock": "16:01",
+      "most_frequent_clock_rows": 3509,
+      "clock_1601_rows": 3509,
+      "boundary_clock": 4848,
+      "both_sides_four_casualty_fields": 99973,
+      "target_specific_populated": 0,
+      "data_type_counts": {
+        "unspecified": 99974
+      }
+    }
+  },
+  "clock_bucket_counts": {
+    "timed_rows_with_province": 535053,
+    "rows_in_same_source_province_date_clock_ties": 161953,
+    "clock_buckets_with_both_initiator_labels": 4925
+  },
+  "pairs_all": {
+    "adjacent_distinct_singleton_clock_pairs_opposite_side": 30996,
+    "with_valid_coordinates_both_rows": 28505,
+    "within_30_minutes": 6931,
+    "within_30_minutes_and_5_km": 1001,
+    "within_5_minutes_and_5_km": 222,
+    "within_120_minutes_and_5_km": 1861,
+    "within_30_minutes_and_10_km": 1792,
+    "within_30_minutes_and_5_km_same_record_id": 0,
+    "within_30_minutes_and_5_km_both_rows_four_casualty_fields": 106,
+    "within_30_minutes_and_5_km_both_rows_target_specific": 93,
+    "within_30_minutes_and_5_km_by_first_initiating_side": {
+      "Friendly": 528,
+      "Enemy": 473
+    },
+    "within_30_minutes_and_5_km_by_year": {
+      "1969": 271,
+      "1970": 225,
+      "1968": 192,
+      "1971": 150,
+      "1972": 79,
+      "1964": 79,
+      "1973": 5
+    },
+    "within_30_minutes_and_5_km_touching_large_unit_operation": 11,
+    "within_30_minutes_and_5_km_neither_clock_on_five_minute_grid": 6
+  },
+  "pairs_by_source": {
+    "SITRA": {
+      "adjacent_distinct_singleton_clock_pairs_opposite_side": 27985,
+      "with_valid_coordinates_both_rows": 25732,
+      "within_30_minutes": 6549,
+      "within_30_minutes_and_5_km": 895,
+      "within_5_minutes_and_5_km": 205,
+      "within_120_minutes_and_5_km": 1672,
+      "within_30_minutes_and_10_km": 1638,
+      "within_30_minutes_and_5_km_same_record_id": 0,
+      "within_30_minutes_and_5_km_both_rows_four_casualty_fields": 0,
+      "within_30_minutes_and_5_km_both_rows_target_specific": 93,
+      "within_30_minutes_and_5_km_by_first_initiating_side": {
+        "Friendly": 478,
+        "Enemy": 417
+      },
+      "within_30_minutes_and_5_km_by_year": {
+        "1969": 244,
+        "1970": 225,
+        "1968": 192,
+        "1971": 150,
+        "1972": 79,
+        "1973": 5
+      },
+      "within_30_minutes_and_5_km_touching_large_unit_operation": 11,
+      "within_30_minutes_and_5_km_neither_clock_on_five_minute_grid": 6
+    },
+    "TIRSA": {
+      "adjacent_distinct_singleton_clock_pairs_opposite_side": 0,
+      "with_valid_coordinates_both_rows": 0,
+      "within_30_minutes": 0,
+      "within_30_minutes_and_5_km": 0,
+      "within_5_minutes_and_5_km": 0,
+      "within_120_minutes_and_5_km": 0,
+      "within_30_minutes_and_10_km": 0,
+      "within_30_minutes_and_5_km_same_record_id": 0,
+      "within_30_minutes_and_5_km_both_rows_four_casualty_fields": 0,
+      "within_30_minutes_and_5_km_both_rows_target_specific": 0,
+      "within_30_minutes_and_5_km_by_first_initiating_side": {},
+      "within_30_minutes_and_5_km_by_year": {},
+      "within_30_minutes_and_5_km_touching_large_unit_operation": 0,
+      "within_30_minutes_and_5_km_neither_clock_on_five_minute_grid": 0
+    },
+    "VCIIA": {
+      "adjacent_distinct_singleton_clock_pairs_opposite_side": 0,
+      "with_valid_coordinates_both_rows": 0,
+      "within_30_minutes": 0,
+      "within_30_minutes_and_5_km": 0,
+      "within_5_minutes_and_5_km": 0,
+      "within_120_minutes_and_5_km": 0,
+      "within_30_minutes_and_10_km": 0,
+      "within_30_minutes_and_5_km_same_record_id": 0,
+      "within_30_minutes_and_5_km_both_rows_four_casualty_fields": 0,
+      "within_30_minutes_and_5_km_both_rows_target_specific": 0,
+      "within_30_minutes_and_5_km_by_first_initiating_side": {},
+      "within_30_minutes_and_5_km_by_year": {},
+      "within_30_minutes_and_5_km_touching_large_unit_operation": 0,
+      "within_30_minutes_and_5_km_neither_clock_on_five_minute_grid": 0
+    },
+    "VNDBA": {
+      "adjacent_distinct_singleton_clock_pairs_opposite_side": 3011,
+      "with_valid_coordinates_both_rows": 2773,
+      "within_30_minutes": 382,
+      "within_30_minutes_and_5_km": 106,
+      "within_5_minutes_and_5_km": 17,
+      "within_120_minutes_and_5_km": 189,
+      "within_30_minutes_and_10_km": 154,
+      "within_30_minutes_and_5_km_same_record_id": 0,
+      "within_30_minutes_and_5_km_both_rows_four_casualty_fields": 106,
+      "within_30_minutes_and_5_km_both_rows_target_specific": 0,
+      "within_30_minutes_and_5_km_by_first_initiating_side": {
+        "Enemy": 56,
+        "Friendly": 50
+      },
+      "within_30_minutes_and_5_km_by_year": {
+        "1964": 79,
+        "1969": 27
+      },
+      "within_30_minutes_and_5_km_touching_large_unit_operation": 0,
+      "within_30_minutes_and_5_km_neither_clock_on_five_minute_grid": 0
+    }
+  },
+  "vndba_source_check": {
+    "component_rows": 365015,
+    "unique_serial_date_components_matching_master": 96110,
+    "matched_both_clock_fields_valid": 89638,
+    "matched_valid_clock_agreement": 89638,
+    "component_loss_fields": {
+      "n_friendly_structures_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 360693,
+        "positive": 4318
+      },
+      "n_enemy_structures_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 362301,
+        "positive": 2710
+      },
+      "n_food_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 364875,
+        "positive": 136
+      },
+      "n_enemy_food_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 362829,
+        "positive": 2182
+      },
+      "n_friendly_fuel_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 364993,
+        "positive": 18
+      },
+      "n_enemy_fuel_gallons_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 365000,
+        "positive": 11
+      },
+      "n_vehicles_lost_by_enemy": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 362250,
+        "positive": 2761
+      },
+      "n_enemy_vehicles_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 363561,
+        "positive": 1450
+      },
+      "n_friendly_weapons_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 352928,
+        "positive": 12083
+      },
+      "n_enemy_weapons_lost": {
+        "populated": 365011,
+        "numeric": 365011,
+        "source_zero": 335666,
+        "positive": 29345
+      }
+    },
+    "matched_loss_fields": {
+      "n_friendly_structures_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 94068,
+        "positive": 2041
+      },
+      "n_enemy_structures_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 95392,
+        "positive": 717
+      },
+      "n_food_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 96089,
+        "positive": 20
+      },
+      "n_enemy_food_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 95735,
+        "positive": 374
+      },
+      "n_friendly_fuel_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 96109,
+        "positive": 0
+      },
+      "n_enemy_fuel_gallons_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 96109,
+        "positive": 0
+      },
+      "n_vehicles_lost_by_enemy": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 95517,
+        "positive": 592
+      },
+      "n_enemy_vehicles_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 95673,
+        "positive": 436
+      },
+      "n_friendly_weapons_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 91154,
+        "positive": 4955
+      },
+      "n_enemy_weapons_lost": {
+        "populated": 96109,
+        "numeric": 96109,
+        "source_zero": 85406,
+        "positive": 10703
+      }
+    },
+    "close_pairs_both_endpoints_linked_to_component": 106,
+    "close_pairs_both_endpoints_linked_with_any_positive_nonweapons_loss": 4,
+    "component_both_support_fields_populated": 1085,
+    "component_valid_ddhhmm_support_request": 0,
+    "component_valid_ddhhmm_support_receipt": 0,
+    "component_valid_ddhhmm_support_both": 0,
+    "component_support_request_field_populated": 3648,
+    "component_support_received_field_populated": 1090,
+    "component_same_day_action_counter_gt_one": 10062
+  }
+}

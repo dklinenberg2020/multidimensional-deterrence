@@ -5,6 +5,7 @@ Research repository for extending empirical deterrence response curves to multip
 - [Theory manuscript and Northern Ireland application](Multidimensional_Deterrence_Theory_Northern_Ireland.md)
 - [Research log and country assessments](research/research-log.md)
 - [Conflict data inventory and limitations](research/conflict-data-review.md)
+- [Vietnam clock and ordering audit](research/vietnam-ordering-review.md)
 - [Incident data dictionary](research/data-dictionary.md)
 - [Acquired source inventory and SHA-256 checksums](research/sources.csv)
 - [Source and incident audits](research/audits/)
