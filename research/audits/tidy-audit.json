@@ -1,0 +1,20 @@
+{
+  "vietnam_incidents": 638760,
+  "vietnam_time_status": {
+    "reported_clock": 555653,
+    "ambiguous_boundary": 77959,
+    "missing": 4896,
+    "out_of_range": 252
+  },
+  "vietnam_late_sitra_rows": 6,
+  "colombia_incidents": 94450,
+  "colombia_date_precision": {
+    "day": 90647,
+    "unknown": 1940,
+    "month": 998,
+    "year": 865
+  },
+  "colombia_victim_rows": 95791,
+  "colombia_incidents_with_victim_rows": 54003,
+  "colombia_victim_rows_without_incident": 0
+}

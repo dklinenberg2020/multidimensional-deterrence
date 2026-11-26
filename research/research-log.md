@@ -1,5 +1,9 @@
 # Research log
 
+## Tidy Vietnam and Colombia tables
+
+Built one clean incident table per country and a separate Colombia victim table. Verified 638,760 unique Vietnam incidents and 94,450 unique Colombia incidents. All 95,791 Colombia victim rows link to a case. Colombia date precision includes 90,647 day, 998 month, 865 year and 1,940 unknown records. Vietnam preserves original clock codes and flags the six rows after the documented SITRA series end. See the [tidy table dictionary](tidy-data.md) and [build audit](audits/tidy-audit.json).
+
 ## GitHub access restored
 
 The GitHub connection now includes `dklinenberg2020`. Verified write access by publishing manuscript commit `23a3019` and acquisition commit `094cb55` to the project's `main` branch. The initial access failure is recorded below.
