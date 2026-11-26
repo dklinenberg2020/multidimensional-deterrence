@@ -1,5 +1,9 @@
 # Research log
 
+## Subdaily archival search
+
+Verified clock-bearing sources for Bojayá and Mitú, Vietnam duty logs, and UN observer reports from Cyprus. Located the relevant INCDA and ICCS archival series and identified Bosnia and Falklands records for further checks. The [source assessment](subdaily-source-search.md) records sample evidence, archive references, and acquisition status.
+
 ## Tidy Vietnam and Colombia tables
 
 Built one clean incident table per country and a separate Colombia victim table. Verified 638,760 unique Vietnam incidents and 94,450 unique Colombia incidents. All 95,791 Colombia victim rows link to a case. Colombia date precision includes 90,647 day, 998 month, 865 year and 1,940 unknown records. Vietnam preserves original clock codes and flags the six rows after the documented SITRA series end. See the [tidy table dictionary](tidy-data.md) and [build audit](audits/tidy-audit.json).
