@@ -1,5 +1,9 @@
 # Research log
 
+## GitHub access restored
+
+The GitHub connection now includes `dklinenberg2020`. Verified write access by publishing manuscript commit `23a3019` and acquisition commit `094cb55` to the project's `main` branch. The initial access failure is recorded below.
+
 ## Initial acquisition and audit
 
 Verified the GitHub project `dklinenberg2020/multidimensional-deterrence` is readable. The connector's repository metadata reported read and push permissions, but the cloud Git credential and the connector's mutation endpoints returned HTTP 403. Repository listing through the connected installation returned `Nathan-Roll1/Extremism` and did not include the project. No writes were attempted against other repositories.
