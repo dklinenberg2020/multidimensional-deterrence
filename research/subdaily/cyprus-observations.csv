@@ -1,0 +1,41 @@
+observation_id,date,clock_start,clock_end,clock_role,place,actor_reported,record_type,source_locator,observation
+cy-001,1974-07-22,16:00,,occurrence,Cyprus,,ceasefire,S/11353/Add.3 para. 7,General ceasefire entered into force
+cy-002,1974-07-22,17:15,,reported_occurrence,Nicosia airport,,air_attack,S/11353/Add.3 para. 7,Report of an air attack after the ceasefire entered into force
+cy-003,1974-07-22,17:30,,occurrence,Camp Tjiklos,UNFICYP,humanitarian_movement,S/11353/Add.4 para. 7,UN convoy arrived to help evacuate civilians and UN personnel
+cy-004,1974-07-22,18:00,,occurrence,Trakhonas,Turkish troops,military_movement,S/11353/Add.4 para. 5,Turkish troops crossed the Green Line
+cy-005,1974-07-22,18:15,,reported_occurrence,Dhikomo,,ground_fighting,S/11353/Add.3 para. 7,Report of ground fighting near the village
+cy-006,1974-07-22,16:00,21:00,coverage_interval,Cyprus,,aggregate,S/11353/Add.4 paras. 1–2,UNFICYP observed and recorded 29 incidents in the first five hours after the ceasefire
+cy-007,1974-07-22,21:45,,report_as_of,Cyprus,UNFICYP,quiet_report,S/11353/Add.3 para. 8,Reports indicated the island was quiet and the ceasefire was holding
+cy-008,1974-07-23,08:30,,occurrence,Nicosia,National Guard and UNFICYP,communication,S/11353/Add.4 para. 13,National Guard commander met UNFICYP and gave assurances of cooperation
+cy-009,1974-07-23,09:30,,occurrence,Nicosia airport,,ground_fighting,S/11353/Add.4 para. 4,Fighting began near the airport
+cy-010,1974-07-23,12:00,,approximate_occurrence,Camp Kronberg,Turkish army,shelling,S/11353/Add.4 para. 6,Mortar shelling began around midday and struck the British High Commission building
+cy-011,1974-07-23,12:30,,occurrence,Nicosia airport,UNFICYP,ceasefire,S/11353/Add.4 para. 4,UNFICYP arranged a local ceasefire
+cy-012,1974-07-23,14:30,,occurrence,Nicosia airport,Both parties and UNFICYP,agreement,S/11353/Add.5 para. 4,Agreement on UN control of airport complex
+cy-013,1974-07-23,14:30,,occurrence,Camp Kronberg,National Guard,military_movement,S/11353/Add.4 para. 6,National Guard began moving into the area around the camp and Ledra Palace
+cy-014,1974-07-23,14:30,,report_received,Camp Kronberg,Turkish and National Guard forces,crossfire,S/11353/Add.5 para. 5,UNFICYP reported crossfire and two Canadian casualties
+cy-015,1974-07-23,,,relative_only,Camp Kronberg,UNFICYP,return_fire,S/11353/Add.5 para. 5,Canadian troops returned fire after warnings and the firing stopped
+cy-016,1974-07-23,14:30,,report_received,Nicosia diplomatic buildings,,incoming_fire,S/11353/Add.5 para. 6,British and French missions reported small-arms fire and other missions came under mortar fire around the same time
+cy-017,1974-07-23,14:50,,report_received,Nicosia,Cypriot acting president,communication,S/11353/Add.4 para. 14,Force Commander received a call about adherence to the ceasefire
+cy-018,1974-07-23,15:00,,occurrence,Nicosia airport,UNFICYP,military_movement,S/11353/Add.5 para. 4,UN personnel moved into the airport area
+cy-019,1974-07-23,17:30,,report_received,Nicosia airport,Turkish forces,ground_fighting,S/11353/Add.5 para. 4,UNFICYP reported Turkish tanks advancing and firing
+cy-020,1974-07-23,,,day,Nicosia airport,,physical_damage,S/11353/Add.5 para. 4,UNFICYP reported damaged and obstructed runway and inoperative control tower
+cy-021,1974-07-23,,,day,Famagusta,National Guard,restriction,S/11353/Add.4 para. 8,National Guard cut water supply to the Turkish Cypriot sector
+cy-022,1974-07-23,21:00,,approximate_effective_time,Nicosia,,ceasefire,S/11353/Add.5 para. 2,Negotiated local ceasefire was to take effect around 21:00
+cy-023,1974-08-06,23:15,,reported_occurrence,Nicosia,,gunfire,S/11353/Add.17 para. 9,Canadian UN peacekeeper sustained gunshot wounds and later died
+cy-024,1974-08-11,21:00,22:00,reported_interval,Kyrenia district,,exchange_of_fire,S/11353/Add.20 para. 2,Reported artillery exchange within the stated hour
+cy-025,1974-08-18,,07:00,reported_end,Pyroi and towards Potamia,,ground_fighting,S/11353/Add.31 para. 1(a),UN Commander reported fighting continued until 07:00
+cy-026,1974-08-19,12:40,,report_received,Nicosia US embassy,,attack,S/11353/Add.32 para. 3,Embassy informed UNFICYP of an ongoing attack and requested assistance
+cy-027,1974-08-19,15:00,,report_as_of,Cyprus,UNFICYP,quiet_report,S/11353/Add.32 para. 1,Ceasefire reported holding with no firing reports as of this time
+cy-028,1974-08-12,,,part_of_day,Nicosia and Larnaca districts,,exchange_of_fire,S/11353/Add.20 para. 2,Report gives an hour-long morning exchange and UN negotiations after it
+cy-029,1974-08-11,,,part_of_day,Cyprus,National Guard,communication,S/11353/Add.20 para. 3,UN headquarters was informed in the evening that the National Guard was prepared to begin withdrawals
+cy-030,1974-08-11,,,part_of_day,Limassol and Paphos districts,National Guard,withdrawal,S/11353/Add.20 para. 3,Report describes Sunday evening evacuations from six named Turkish Cypriot villages
+cy-031,1974-08-12,,,day,Larnaca and Paphos,National Guard,withdrawal,S/11353/Add.20 para. 3,National Guard evacuated two Turkish sectors and UNFICYP assumed responsibility for protection
+cy-032,1974-08-10,,,day,Famagusta harbour,,agreement,S/11353/Add.20 para. 4,Resupply agreement was reached but implementation was delayed
+cy-033,1974-08-11,,,day,Famagusta,National Guard and UNFICYP,construction_stopped,S/11353/Add.20 para. 4,National Guard stopped fortification work after UNFICYP protested
+cy-034,1974-08-11,,,part_of_day,Famagusta harbour,ICRC,resupply,S/11353/Add.20 para. 4,ICRC resupplied personnel that evening after a later agreement
+cy-035,1974-08-12,,,day,Multiple localities,UNFICYP,humanitarian_movement,S/11353/Add.20 para. 4,UNFICYP convoys resumed aid delivery
+cy-036,1974-08-11,,,part_of_day,Nicosia Green Line,ICRC and UNFICYP,prisoner_release,S/11353/Add.20 para. 5,Thirteen Turkish prisoners of war were transferred in the evening
+cy-037,1974-08-12,,,part_of_day,Nicosia,ICRC and UNFICYP,prisoner_release,S/11353/Add.20 para. 5,Three additional Turkish prisoners were released in the morning
+cy-038,1974-07-22,13:30,,reported_occurrence,Beghaz area,,military_movement,S/11353/Add.3 para. 3,Report records a paratroop drop; subsequent heavy fighting on the Green Line had no separate clock
+cy-039,1974-07-22,14:20,,reported_occurrence,Camp Tjiklos,UNFICYP and refugees,evacuation,S/11353/Add.3 para. 3,Finnish peacekeepers and refugees departed after heavy firing and fires
+cy-040,1974-07-22,15:00,,reported_occurrence,Nicosia airport,Turkish forces,air_attack,S/11353/Add.3 para. 2,Heavy air attack reported before the general ceasefire

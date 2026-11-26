@@ -1,0 +1,16 @@
+observation_id,measure,value_min,value_max,qualifier,measurement_scope
+vn-19680101-02,small_arms_rounds,12,12,approximate,Company C report of incoming fire
+vn-19680101-02,m79_rounds,2,2,approximate,Company C report of incoming fire
+vn-19680101-02,duration_minutes,3,4,reported_range,Company C report of incoming fire
+vn-19680101-sh,friendly_killed,0,0,reported,US battalion daily casualty summary
+vn-19680101-sh,friendly_wounded,0,0,reported,US battalion daily casualty summary
+vn-19680101-sh,enemy_killed,0,0,reported,US battalion daily casualty summary
+co-c03,paramilitary_killed,1,1,reported,One death reported aboard the returning boat
+co-c10,fatalities,0,0,reported,First projectile on May 2 only
+co-c10,homes_destroyed,1,1,reported,First projectile on May 2 only
+cy-006,incidents_logged,29,29,reported,UNFICYP record count over five hours
+cy-014,canadian_casualties,2,2,reported,UNFICYP crossfire report
+cy-023,canadian_fatalities,1,1,reported,UN peacekeeper later died during evacuation
+cy-028,duration_minutes,60,60,reported,Morning exchange of fire
+cy-036,prisoners_released,13,13,reported,Evening handover on August 11
+cy-037,prisoners_released,3,3,reported,Morning release on August 12

@@ -1,0 +1,11 @@
+{
+  "cyprus": {
+    "reports_indexed": 34,
+    "candidate_lines": 202,
+    "source_sha256": "f4af8c43d1ca9c4fec0798b38e6098f8a51fa50233d45814cf3a2ac06113b89c"
+  },
+  "vietnam": {
+    "pages_indexed": 100,
+    "source_sha256": "bdb211dae589fa41755baa3f50819db046614dd72f7b95591dfac924fb7b1f57"
+  }
+}

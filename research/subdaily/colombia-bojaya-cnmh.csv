@@ -1,0 +1,16 @@
+observation_id,date,clock_start,clock_end,clock_role,place,actor_reported,record_type,source_locator,observation,prior_pilot_id
+co-c01,2002-04-30,,,part_of_day,Vigia del Fuerte,FARC,movement,printed p. 53,FARC entered the municipality in the afternoon after paramilitaries crossed the river,
+co-c02,2002-05-01,06:00,,reported_occurrence,Vigia del Fuerte,Paramilitaries,movement,printed p. 53,Reported organization of a boat movement toward the town followed by FARC interception,
+co-c03,2002-05-01,,06:30,reported_latest_time,Bellavista,Paramilitaries,movement,printed p. 53,Boat had returned by 06:30 with one paramilitary reported killed,
+co-c04,2002-05-01,09:00,,approximate_occurrence,Vigia del Fuerte and Bellavista,FARC and paramilitaries,communication,printed p. 54,Radio exchange included a deadline and an explicit challenge,
+co-c05,2002-05-01,,,part_of_day,Bellavista,FARC,movement,printed p. 54,FARC began crossing and entering Bellavista around midmorning,
+co-c06,2002-05-01,,,part_of_day,Bellavista,Civilians,displacement_or_shelter,printed p. 57,Civilians sheltered in the church and two adjacent buildings during afternoon fighting,
+co-c07,2002-05-01,18:00,,approximate_occurrence,Bellavista,FARC and paramilitaries,ceasefire,printed p. 58,Both sides agreed over radio to stop fighting until morning,co-b02
+co-c08,2002-05-02,06:00,,reported_occurrence,Bellavista,FARC and paramilitaries,ground_fighting,printed p. 58,Fighting resumed after renewed radio contact,co-b03
+co-c09,2002-05-02,09:00,,approximate_occurrence,Bellavista,FARC,request,printed p. 58,Commander reportedly requested reinforcements by radio after losses,
+co-c10,2002-05-02,10:30,,approximate_occurrence,Bellavista,FARC,projectile,printed p. 58,First projectile destroyed a home near the church with no reported fatalities,co-b04
+co-c11,2002-05-02,,,relative_only,Bellavista,FARC,projectile,printed p. 58,Second projectile fell without exploding at the health post a few minutes after the first,
+co-c12,2002-05-02,11:00,,approximate_occurrence,Bellavista,FARC,projectile,printed p. 59,Third projectile exploded inside the church,co-b05
+co-c13,2002-05-02,18:00,,reported_occurrence,Bellavista,FARC and paramilitaries,ceasefire,printed p. 63,Both sides communicated about ending fighting for the day,
+co-c14,2002-05-03,18:00,,reported_occurrence,Bellavista,FARC and paramilitaries,ceasefire,printed p. 66,Commanders again agreed to suspend fighting until the next day,
+co-c15,2002-05-04,08:30,,approximate_testimony,Vigia del Fuerte,Paramilitaries according to witness,reported_air_fire,printed p. 66,Witness recalled a helicopter firing near people gathered for humanitarian assistance,

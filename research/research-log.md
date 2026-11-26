@@ -1,5 +1,9 @@
 # Research log
 
+## SITREP transcription expansion
+
+Reviewed the published Gaza specimen and expanded the [subdaily tables](subdaily/README.md) for Colombia, Vietnam and Cyprus. Completed a full Vietnam source day, transcribed a second Colombia chronology, and indexed the entire public Cyprus report series with curated observations and coverage intervals. The underlying field reports remain necessary for comparable continuous coverage.
+
 ## Pilot transcriptions and additional archive checks
 
 Completed two [subdaily transcription pilots](pilots/README.md). The Colombia pilot retained 10 clock-bearing observations and identified 10 potential CNMH episode records. The Vietnam pilot separated combat reports' receipt clocks from independently stated occurrence times. No event-level link was verified. The [archive follow-up](subdaily-source-search.md#follow-up-on-the-other-conflicts) identifies exact UNFICYP and UNPROFOR file references.
