@@ -1,5 +1,9 @@
 # Research log
 
+## Multilingual archival follow-up
+
+Reviewed Spanish, Vietnamese, Turkish, Greek and Polish sources. Added 12 source observations and a 33-date index to the Turkish Red Crescent compilation. The archive review identifies a 15-minute discrepancy in Bojayá and the Colombia monitoring mechanism verification annex as an acquisition target. See [source locations and checksums](subdaily/multilingual-sources.md).
+
 ## SITREP transcription expansion
 
 Reviewed the published Gaza specimen and expanded the [subdaily tables](subdaily/README.md) for Colombia, Vietnam and Cyprus. Completed a full Vietnam source day, transcribed a second Colombia chronology, and indexed the entire public Cyprus report series with curated observations and coverage intervals. The underlying field reports remain necessary for comparable continuous coverage.

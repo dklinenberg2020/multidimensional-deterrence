@@ -1,0 +1,13 @@
+observation_id,conflict,language,date,clock_as_reported,clock_role,place,reported_actor,observation,comparison_id,source_key,source_locator
+ml-co-01,Colombia,es,2002-05-01,06:00,approximate_occurrence,Vigía del Fuerte,Paramilitaries and FARC,OHCHR says fighting began at about 06:00,co-c02,co-ohchr,chronology May 1
+ml-co-02,Colombia,es,2002-05-02,early morning,part_of_day,Bellavista,Paramilitaries and FARC,OHCHR says fighting resumed in the early morning,co-c08,co-ohchr,chronology May 2
+ml-co-03,Colombia,es,2002-05-02,10:00,reported_occurrence,Pueblo Nuevo,FARC,OHCHR reports installation of a projectile launcher,,co-ohchr,chronology May 2
+ml-co-04,Colombia,es,2002-05-02,10:30,approximate_occurrence,Bellavista,FARC,OHCHR estimates that the first projectile struck a civilian home at about 10:30,co-c10,co-ohchr,chronology May 2
+ml-co-05,Colombia,es,2002-05-02,10:45,approximate_occurrence,Bellavista,FARC,OHCHR estimates the church explosion at about 10:45; CNMH records about 11:00,co-c12,co-ohchr,chronology May 2
+ml-cy-01,Cyprus,tr,1974-07-24,11:00,reported_occurrence,Red Crescent medical premises,,A message summarized under July 25 dates a projectile impact in the storage area to July 24,,cy-kizilay,PDF p. 355
+ml-cy-02,Cyprus,tr,1974-08-01,06:00,reported_occurrence,Kyrenia,Turkish Red Crescent,Field team's report dates its arrival at the port to 06:00,,cy-kizilay,PDF p. 317
+ml-cy-03,Cyprus,tr,1974-08-14,09:00,reported_entry_time,Paphos area (provisional),National Guard,Red Crescent compilation quotes an ICRC account of entry into a Turkish Cypriot area; subsequent firing has no separate clock,,cy-kizilay,PDF p. 316
+ml-cy-04,Cyprus,el,1974-07-22,16:00,ceasefire_effective_time,Cyprus,,Parliamentary inquiry gives 16:00 for the ceasefire and describes reported activity continuing afterward,cy-001,cy-fakelos1,PDF p. 142
+ml-vn-01,Vietnam,vi,1973-01-28,04:00,retrospective_occurrence,Cửa Việt,Republic of Vietnam forces,Vũ Ngự Chiêu dates an early phase of the attack to 04:00,,vn-vnc,PDF p. 34
+ml-vn-02,Vietnam,vi,1973-01-28,shortly before 08:00,retrospective_time_bound,Cửa Việt,Republic of Vietnam forces,Vũ Ngự Chiêu places the capture of the port shortly before the ceasefire,,vn-vnc,PDF p. 34
+ml-vn-03,Vietnam,vi,1973-01-31,early morning,retrospective_part_of_day,Cửa Việt,,Veteran account published by Vietnam National Archives Center I dates the end of firing to early morning,,vn-archives1,last narrative paragraphs
